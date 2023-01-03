@@ -5,9 +5,24 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    <div className='app-container'>
+      <div className='header'>
         <Header/>
-        <Technologies/>
+      </div>
+      <div className='nav'>
+        <div className='container'>
+          Profile
+        </div>
+        <div className='container'>
+          Messages
+        </div>
+        <div>
+          News
+        </div>
+      </div>
+      <div className='content'>
+          Content
+      </div>
     </div>
   );
 }

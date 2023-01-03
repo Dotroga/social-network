@@ -1,4 +1,26 @@
 * {
   margin: 5px;
-  background-color: #e5ebf3;
+  background-color: #bfc8ee;
+  border-radius: 3px;
+}
+.app-container {
+  display: grid;
+  grid-template-areas:
+  'nav h h h h'
+  'nav c c c c';
+  grid-template-rows: 60px 1fr ;
+  grid-template-columns: 2fr 10fr;
+}
+.header {
+  grid-area: h;
+  background-color: #f0f1fb;
+}
+.nav {
+  grid-area: nav;
+  background-color: #f0f1fb;
+}
+
+.content {
+  background-color: #f0f1fb;
+  grid-area: c;
 }
