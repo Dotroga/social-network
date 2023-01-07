@@ -1,28 +1,15 @@
 import React from 'react';
-import Technologies from "./components/Technologies";
-import Header from "./components/Header";
-import './App.css';
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Profile from "./components/Profile/Profile";
+import s from'./App.module.css';
 
 function App() {
   return (
-    <div className='app-container'>
-      <div className='header'>
-        <Header/>
-      </div>
-      <div className='nav'>
-        <div className='container'>
-          Profile
-        </div>
-        <div className='container'>
-          Messages
-        </div>
-        <div>
-          News
-        </div>
-      </div>
-      <div className='content'>
-          Content
-      </div>
+    <div className={s.app}>
+      <Header/>
+      <Navbar/>
+      <Profile/>
     </div>
   );
 }
