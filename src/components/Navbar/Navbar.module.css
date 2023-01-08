@@ -2,3 +2,6 @@
     grid-area: nav;
     background-color: #f0f1fb;
 }
+.item a{
+    color: white;
+}

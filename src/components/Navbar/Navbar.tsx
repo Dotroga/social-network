@@ -1,23 +1,22 @@
 import React from 'react';
 import s from './Navbar.module.css'
+import {NavLink} from "react-router-dom";
 
 function Header() {
   return (<div className={s.nav}>
-      <div>
-        Messages
+      <div className={s.item}>
+        <NavLink to="/profile">Profile</NavLink>
       </div>
-      <div>
-        News
+      <div className={s.item}>
+        <NavLink to="/messages">Messages</NavLink>
       </div>
-      <div>
-        Profile
+      <div className={s.item}>
+        <NavLink to="/news">News</NavLink>
       </div>
-      <div>
-        Seting
+      <div className={s.item}>
+        <NavLink to="/setting">Setting</NavLink>
       </div>
-
-    </div>
-  );
+    </div>);
 }
 
 export default Header;
