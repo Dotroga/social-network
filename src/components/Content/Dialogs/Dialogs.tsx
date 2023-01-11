@@ -4,7 +4,7 @@ import React from 'react';
 function Dialogs() {
   return (
     <div className='container'>
-      dialogs
+      Sorry, i am on Quizter
     </div>
   );
 }
