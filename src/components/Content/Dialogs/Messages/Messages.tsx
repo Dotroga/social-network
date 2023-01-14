@@ -1,9 +1,16 @@
 import React from 'react';
 import s from './Messages.module.css'
-const Messages = () => {
+import {messagesType} from "../../../../App";
+
+
+type MessagesPropsType = {
+  messages: messagesType[]
+}
+
+const Messages = (props: MessagesPropsType) => {
   return (
     <div className={s.messages}>
-      Messages
+      {props.messages.map(m=><div key={m.id}>{m.message}</div>)}
     </div>
   );
 };

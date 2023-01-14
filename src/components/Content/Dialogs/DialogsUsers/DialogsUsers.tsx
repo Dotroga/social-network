@@ -1,10 +1,16 @@
 import React from 'react';
 import s from './DialogsUsers.module.css'
+import {dialogsType} from "../../../../App";
 
-const DialogsUsers = () => {
+
+type DialogsPropsType = {
+  dialogs: dialogsType[]
+}
+
+const DialogsUsers = (props: DialogsPropsType) => {
   return (
     <div className={s.dialogsUsers }>
-      users
+      {props.dialogs.map(d=><div key={d.id} >{d.name}</div>)}
     </div>
   );
 };
