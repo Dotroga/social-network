@@ -1,0 +1,7 @@
+.messages {
+    grid-area: m;
+    margin: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    height: 100%;
+}

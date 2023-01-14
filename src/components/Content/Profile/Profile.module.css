@@ -1,4 +1,6 @@
 .profile {
-    background-color: #f0f1fb;
+    margin: 10px;
+    background-color: #ffffff;
     grid-area: c;
+    border-radius: 6px;
 }

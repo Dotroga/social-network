@@ -1,7 +1,43 @@
 .nav {
     grid-area: nav;
-    background-color: #f0f1fb;
+    background-color: #e8e8f3;
+    border-radius: 10px 0 0 10px;
+    margin: 1px;
+}
+
+.items {
+    margin-top: -100px;
+}
+.item {
+    margin: 6px;
+}
+img.redux {
+    z-index: 2;
+    width: 60px;
+    display: block;
+    margin:  30px auto;
+}
+img.react {
+    position: relative;
+    bottom: 121px;
+    right: 1px;
+    width: 140px;
+    opacity: 0.05;
 }
 .item a{
-    color: white;
+    color: #8e8ea9;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    transition: all 0.2s ease-in;
+}
+.item a.active {
+    margin: 6px;
+    color: #393c4d;
+    transform: scale(1.2);
+    transition: all 0.2s ease-in;
+}
+
+.setting {
+    margin-top: 30px;
 }

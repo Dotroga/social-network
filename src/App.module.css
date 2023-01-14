@@ -1,15 +1,22 @@
-* {
-  margin: 5px;
-  background-color: #bfc8ee;
-  border-radius: 3px;
-}
+
 .app {
   display: grid;
   grid-template-areas:
-  'nav h h h h'
   'nav c c c c';
-  grid-template-rows: 60px 1fr ;
   grid-template-columns: 2fr 10fr;
+  background-color: #e8e8f3;
+  min-width: 580px;
+  max-width: 1100px;
+  margin: auto;
+  height: 90vh;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px #c6c3e5;
+}
+.content {
+  box-shadow: 2px 2px 20px #d0cde3;
+  background: -webkit-linear-gradient(90deg, #f3f5fa,#f1effb);
+  background: linear-gradient(90deg, #f3f5fa,#f1effb);
+  border-radius: 10px;
 }
 
 

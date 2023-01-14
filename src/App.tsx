@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Content/Profile/Profile";
 import s from'./App.module.css';
@@ -10,7 +9,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className={s.app}>
-        <Header/>
         <Navbar/>
         <div className={s.content}>
           <Routes>

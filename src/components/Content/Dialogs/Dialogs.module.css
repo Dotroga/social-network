@@ -1,0 +1,7 @@
+.dialogs {
+    display: grid;
+    grid-template-areas:
+    'm m u';
+    grid-template-columns: 200px 200px;
+    height: 90%;
+}

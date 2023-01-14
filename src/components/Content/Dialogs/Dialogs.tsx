@@ -1,10 +1,14 @@
 import React from 'react';
+import DialogsUsers from "./DialogsUsers/DialogsUsers";
+import Messages from "./Messages/Messages";
+import s from './Dialogs.module.css'
 
 
 function Dialogs() {
   return (
-    <div className='container'>
-      Sorry, i am on Quizter
+    <div className={s.dialogs}>
+      <Messages/>
+      <DialogsUsers/>
     </div>
   );
 }
