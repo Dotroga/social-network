@@ -2,18 +2,18 @@ import React from 'react';
 import DialogsUsers from "./DialogsUsers/DialogsUsers";
 import Messages from "./Messages/Messages";
 import s from './Dialogs.module.css'
-import {dialogsType, messagesType} from "../../../App";
+import {DialogsType} from "../../../index";
+
 
 type DialogsPropsType = {
-    dialogs: dialogsType[]
-    messages: messagesType[]
+    dialogs: DialogsType
 }
 
-function Dialogs(props: DialogsPropsType) {
+const Dialogs: React.FC<DialogsPropsType> = ({dialogs}) => {
   return (
     <div className={s.dialogs}>
-      <Messages messages={props.messages}/>
-      <DialogsUsers dialogs={props.dialogs}/>
+      <Messages messages={dialogs.messages}/>
+      <DialogsUsers dialogsUsers={dialogs.dialogsUsers}/>
     </div>
   );
 }

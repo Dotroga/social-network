@@ -1,16 +1,15 @@
 import React from 'react';
 import s from './Messages.module.css'
-import {messagesType} from "../../../../App";
-
+import {MessagesType} from "../../../../index";
 
 type MessagesPropsType = {
-  messages: messagesType[]
+  messages: MessagesType[]
 }
 
-const Messages = (props: MessagesPropsType) => {
+const Messages: React.FC<MessagesPropsType> = ({messages}) => {
   return (
     <div className={s.messages}>
-      {props.messages.map(m=><div key={m.id}>{m.message}</div>)}
+      {messages.map(m=><div key={m.id}>{m.message}</div>)}
     </div>
   );
 };

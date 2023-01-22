@@ -1,22 +1,15 @@
 import React from 'react';
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
+import {PostType} from "../../../../index";
 
-export type PostType = {
-  id: number
-  text: string
+type MyPostPropsType = {
+  posts: PostType[]
 }
-
-const postElements: PostType[] = [
-  {id: 1, text: 'Hi, how are you?',},
-  {id: 2, text: 'I am Better all!',}
-]
-
-
-function MyPost() {
+const MyPost: React.FC<MyPostPropsType> = ({posts}) => {
   return (
     <div className={s.myPost}>
-      <Post message={postElements}/>
+      <Post posts={posts}/>
     </div>
   );
 }

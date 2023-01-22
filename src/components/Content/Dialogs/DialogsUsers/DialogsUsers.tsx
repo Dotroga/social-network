@@ -1,16 +1,17 @@
 import React from 'react';
 import s from './DialogsUsers.module.css'
-import {dialogsType} from "../../../../App";
+import {DialogsUsersType} from "../../../../index";
+
 
 
 type DialogsPropsType = {
-  dialogs: dialogsType[]
+  dialogsUsers: DialogsUsersType[]
 }
 
-const DialogsUsers = (props: DialogsPropsType) => {
+const DialogsUsers: React.FC<DialogsPropsType> = ({dialogsUsers}) => {
   return (
     <div className={s.dialogsUsers }>
-      {props.dialogs.map(d=><div key={d.id} >{d.name}</div>)}
+      {dialogsUsers.map(d=><div key={d.id} >{d.name}</div>)}
     </div>
   );
 };

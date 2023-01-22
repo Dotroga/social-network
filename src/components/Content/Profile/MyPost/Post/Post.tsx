@@ -1,15 +1,15 @@
 import React from 'react';
 import s from './Post.module.css'
-import {PostType} from '../MyPost'
+import {PostType} from "../../../../../index";
 
-type MyPostPropsType = {
-  message: PostType[]
+type PostPropsType = {
+  posts: PostType[]
 }
 
-function Post(props: MyPostPropsType) {
+const Post: React.FC<PostPropsType> = ({posts}) => {
   return (
     <div className={s.post}>
-      {props.message.map(p=><div key={p.id}>{p.text}</div>)}
+      {posts.map(p=><div key={p.id}>{p.text}</div>)}
     </div>
   );
 }
