@@ -4,7 +4,8 @@ import Profile from "./components/Content/Profile/Profile";
 import s from'./App.module.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
-import {StateType} from "./index";
+import {StateType} from "./Redux/state";
+
 
 type AppPropsType = {
   state: StateType
