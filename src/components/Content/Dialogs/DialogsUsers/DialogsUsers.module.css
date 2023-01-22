@@ -1,8 +1,5 @@
 .dialogsUsers {
-    grid-area: u;
-    margin: 20px;
+    margin: 15px;
     border-radius: 8px;
     background-color: #ffffff;
-    height: 100%;
-    max-width: 200px;
 }

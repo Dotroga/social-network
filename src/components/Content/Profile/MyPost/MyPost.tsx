@@ -7,20 +7,16 @@ export type PostType = {
   text: string
 }
 
-const  message1: PostType = {
-  id: 1,
-  text: 'Hi, how are you?',
-}
-const  message2: PostType = {
-  id: 2,
-  text: 'I am Better all!',
-}
+const postElements: PostType[] = [
+  {id: 1, text: 'Hi, how are you?',},
+  {id: 2, text: 'I am Better all!',}
+]
+
 
 function MyPost() {
   return (
     <div className={s.myPost}>
-      <Post message={message1}/>
-      <Post message={message2}/>
+      <Post message={postElements}/>
     </div>
   );
 }

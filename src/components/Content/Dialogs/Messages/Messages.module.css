@@ -1,7 +1,5 @@
 .messages {
-    grid-area: m;
-    margin: 20px;
+    margin: 15px 0 15px 15px ;
     border-radius: 8px;
     background-color: #ffffff;
-    height: 100%;
 }

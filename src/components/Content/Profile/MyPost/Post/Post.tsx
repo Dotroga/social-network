@@ -3,13 +3,13 @@ import s from './Post.module.css'
 import {PostType} from '../MyPost'
 
 type MyPostPropsType = {
-  message: PostType
+  message: PostType[]
 }
 
 function Post(props: MyPostPropsType) {
   return (
     <div className={s.post}>
-      {props.message.text}
+      {props.message.map(p=><div key={p.id}>{p.text}</div>)}
     </div>
   );
 }
