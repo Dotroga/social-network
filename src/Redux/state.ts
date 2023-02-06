@@ -1,46 +1,58 @@
+import {v1} from "uuid";
+
 export type PostType = {
-  id: number
+  id: string
   text: string
 }
 export type DialogsUsersType = {
-  id: number
+  id: string
   name: string
 }
 export type MessagesType = {
-  id: number
+  id: string
   message: string
 }
 export type DialogsType = {
   dialogsUsers: DialogsUsersType[]
   messages: MessagesType[]
 }
-export type StateType ={
+export type ProfilePageType = {
   posts: PostType[]
+  textForInputPost: string
+}
+
+export type StateType ={
+  profilePage: ProfilePageType
   dialogs: DialogsType
 }
 
-export const state: StateType = {
-  posts: [
-    {id: 1, text: 'Hi, how are you?',},
-    {id: 2, text: 'I am Better all!',}
-  ],
+const state: StateType = {
+  profilePage: {
+    posts: [
+      {id: v1(), text: 'Hi, how are you?'},
+      {id: v1(), text: 'I am Better all!'}
+    ],
+    textForInputPost: ''
+  },
   dialogs: {
     dialogsUsers: [
-      {id: 0, name: 'Vasili'},
-      {id: 1, name: 'Evgeniy'},
-      {id: 2, name: 'Igor'},
-      {id: 3, name: 'Boss'},
-      {id: 4, name: 'Dasha'},
-      {id: 5, name: 'Roma'},
-      {id: 6, name: 'Timur'},
-      {id: 7, name: 'Andreu'}
+      {id: v1(), name: 'Vasili'},
+      {id: v1(), name: 'Evgeniy'},
+      {id: v1(), name: 'Igor'},
+      {id: v1(), name: 'Boss'},
+      {id: v1(), name: 'Dasha'},
+      {id: v1(), name: 'Roma'},
+      {id: v1(), name: 'Timur'},
+      {id: v1(), name: 'Andreu'}
     ],
     messages: [
-      { id: 1, message: 'Hi!' },
-      { id: 2, message: 'Where are you from' },
-      { id: 3, message: 'How are you?' },
-      { id: 4, message: 'I started studying mobile development !' },
-      { id: 5, message: "Cool, and I'm currently studying react, doing a big project" }
+      { id: v1(), message: 'Hi!' },
+      { id: v1(), message: 'Where are you from' },
+      { id: v1(), message: 'How are you?' },
+      { id: v1(), message: 'I started studying mobile development !' },
+      { id: v1(), message: "Cool, and I'm currently studying react, doing a big project" }
     ]
   }
 }
+
+export default state
