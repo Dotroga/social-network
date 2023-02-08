@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
-import {ProfilePageType} from "../../../Redux/state";
+import {ProfilePageType} from "../../../Redux/store";
 
 
 type ProfilePropsType = {

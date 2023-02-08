@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import state from "./Redux/state";
+import {renderTree} from "./render";
+import store from './Redux/store'
 
 
-ReactDOM.render(
-    <App state={state}/>,
-  document.getElementById('root')
-);
+store.subscribe(renderTree)
+
+
+
+

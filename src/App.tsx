@@ -1,29 +1,20 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Content/Profile/Profile";
 import s from'./App.module.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
-import {StateType} from "./Redux/state";
-import {v1} from "uuid";
+import {StoreType} from "./Redux/store";
 
 
 type AppPropsType = {
-  state: StateType
+  store: StoreType
 }
 
-const App: React.FC<AppPropsType> = (props) => {
-  const [state, setState] = useState<StateType>(props.state)
+const App: React.FC<AppPropsType> = ({store}) => {
 
-  const addNewPost = () => {
-      const newPost = {id: v1(), text: state.profilePage.textForInputPost}
-    setState({...state,
-      profilePage: {...state.profilePage,
-        posts:[newPost, ...state.profilePage.posts], textForInputPost: ''}})
-  }
-  const textPostHandlerForProfile = (text: string) => {
-    setState({...state, profilePage: {...state.profilePage, textForInputPost: text}})
-  }
+  const state = store.getState()
+
     return (
     <BrowserRouter>
       <div className={s.app}>
@@ -33,8 +24,8 @@ const App: React.FC<AppPropsType> = (props) => {
             <Route path='/profile' element={
               <Profile
                 profilePage={state.profilePage}
-                textPostHandler={textPostHandlerForProfile}
-                addNewPost={addNewPost}/>
+                textPostHandler={store.changeNewTextPost.bind(store)}
+                addNewPost={store.addNewPost.bind(store)}/>
             }/>
             <Route path='/messages' element={
               <Dialogs

@@ -2,7 +2,7 @@ import React from 'react';
 import DialogsUsers from "./DialogsUsers/DialogsUsers";
 import Messages from "./Messages/Messages";
 import s from './Dialogs.module.css'
-import {DialogsType} from "../../../Redux/state";
+import {DialogsType} from "../../../Redux/store";
 
 
 
