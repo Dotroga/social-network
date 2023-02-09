@@ -1,16 +1,25 @@
 import React from 'react';
 import s from './Post.module.css'
-import {PostType} from "../../../../../Redux/store";
+import {ActionsType, addLikeAC, PostType} from "../../../../../Redux/store";
 
 
 type PostPropsType = {
   posts: PostType[]
+  dispatch: (action: ActionsType)=>void
 }
 
-const Post: React.FC<PostPropsType> = ({posts}) => {
+const Post: React.FC<PostPropsType> = ({posts, dispatch}) => {
+  const addLike = (postsId: string) => {
+    dispatch(addLikeAC(postsId))
+  }
+
   return (
-    <div className={s.post}>
-      {posts.map(p=><div key={p.id}>{p.text}</div>)}
+    <div>
+      {posts.map(p=>
+        <div key={p.id} className={s.post}>
+          <span className={s.text}>{p.text}</span>
+          <span className={s.like} onClick={()=>addLike(p.id)}>{p.like}</span>
+        </div>)}
     </div>
   );
 }

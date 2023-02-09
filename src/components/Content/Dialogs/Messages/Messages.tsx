@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Messages.module.css'
-import {MessagesType} from "../../../../Redux/store";
+import {ActionsType, addMessageAC, DialogsType, writingNewMessagesAC} from "../../../../Redux/store";
 
 
 type MessagesPropsType = {
-  messages: MessagesType[]
+  dialogs: DialogsType
+  dispatch: (action: ActionsType) => void
 }
 
-const Messages: React.FC<MessagesPropsType> = ({messages}) => {
+const Messages: React.FC<MessagesPropsType> = ({dialogs, dispatch}) => {
+  const onChangeMessages = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(writingNewMessagesAC(e.currentTarget.value))
+  }
+  const addMessage = () => dispatch(addMessageAC())
   return (
     <div className={s.messages}>
-      {messages.map(m=><div key={m.id}>{m.message}</div>)}
+      <textarea onChange={onChangeMessages} value={dialogs.textForInputMessages}></textarea>
+      <button onClick={addMessage} >Add</button>
+      {dialogs.messages.map(m=><div key={m.id}>{m.message}</div>)}
     </div>
   );
 };

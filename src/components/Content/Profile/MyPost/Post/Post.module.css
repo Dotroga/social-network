@@ -1,0 +1,25 @@
+.post {
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    margin: 5px;
+
+}
+.text {
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.like {
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    color: red;
+    cursor: pointer;
+    user-select: none;
+}

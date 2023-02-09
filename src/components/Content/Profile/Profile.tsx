@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
 import {
   ActionsType, addPostAC,
-  changeNewPostTextAC,
+  writingNewPostAC,
   ProfilePageType
 } from "../../../Redux/store";
 
@@ -20,7 +20,7 @@ const Profile: React.FC<ProfilePropsType> = (
 
   const textPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.currentTarget.value
-    dispatch(changeNewPostTextAC(text))
+    dispatch(writingNewPostAC(text))
   }
   const pureOnEnter = (e: KeyboardEvent<HTMLTextAreaElement>) =>
    e.key === 'Enter' && addPost
@@ -43,7 +43,7 @@ const Profile: React.FC<ProfilePropsType> = (
           </button>
         </div>
       </div>
-      <MyPost posts={profilePage.posts}/>
+      <MyPost posts={profilePage.posts} dispatch={dispatch}/>
     </div>
 
   );

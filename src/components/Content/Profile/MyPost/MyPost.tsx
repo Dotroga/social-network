@@ -1,15 +1,16 @@
 import React from 'react';
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
-import {PostType} from "../../../../Redux/store";
+import {ActionsType, PostType} from "../../../../Redux/store";
 
 type MyPostPropsType = {
   posts: PostType[]
+  dispatch: (action: ActionsType)=>void
 }
-const MyPost: React.FC<MyPostPropsType> = ({posts}) => {
+const MyPost: React.FC<MyPostPropsType> = ({posts,dispatch}) => {
   return (
     <div className={s.myPost}>
-      <Post posts={posts}/>
+      <Post posts={posts} dispatch={dispatch}/>
     </div>
   );
 }

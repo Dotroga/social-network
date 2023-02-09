@@ -28,7 +28,8 @@ const App: React.FC<AppPropsType> = ({store}) => {
             }/>
             <Route path='/messages' element={
               <Dialogs
-                dialogs={state.dialogs}/>
+                dialogs={state.dialogs}
+                dispatch={store.dispatch.bind(store)}/>
             }/>
             {/*<Route path='/news' element={<News />}/>*/}
             {/*<Route path='/users' element={<UsersListContainer/>}/>*/}
