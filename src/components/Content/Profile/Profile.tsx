@@ -1,26 +1,31 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
-import {ProfilePageType} from "../../../Redux/store";
+import {
+  ActionsType, addPostAC,
+  changeNewPostTextAC,
+  ProfilePageType
+} from "../../../Redux/store";
 
 
 type ProfilePropsType = {
   profilePage: ProfilePageType
-  textPostHandler: (text: string) => void
-  addNewPost: () => void
+  dispatch: (action: ActionsType)=>void
 }
 const Profile: React.FC<ProfilePropsType> = (
   {
     profilePage,
-    textPostHandler,
-    addNewPost
+    dispatch
   }) => {
 
-  const textPostChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    textPostHandler(e.currentTarget.value)
-
+  const textPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.currentTarget.value
+    dispatch(changeNewPostTextAC(text))
+  }
   const pureOnEnter = (e: KeyboardEvent<HTMLTextAreaElement>) =>
-   e.key === 'Enter' && addNewPost()
+   e.key === 'Enter' && addPost
+
+  const addPost = () => dispatch(addPostAC())
 
   return (
     <div className='container'>
@@ -33,7 +38,7 @@ const Profile: React.FC<ProfilePropsType> = (
               value={profilePage.textForInputPost}
               placeholder={'text'}/>
           <button
-            onClick={addNewPost}
+            onClick={addPost}
           >Add
           </button>
         </div>

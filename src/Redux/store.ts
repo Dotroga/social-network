@@ -24,13 +24,20 @@ export type StateType ={
   profilePage: ProfilePageType
   dialogs: DialogsType
 }
+
 export type StoreType = {
   _state: StateType
-  changeNewTextPost: (text: string) => void
-  addNewPost: ()=>void
   _onChange: ()=>void
   subscribe: (callBack: ()=> void)=>void
   getState: ()=> StateType
+  dispatch: (action: ActionsType) => void
+}
+
+export type ActionsType = AddPostActionType | ChangeNewTextPostActionType
+export type AddPostActionType = { type: 'ADD-POST' }
+export type ChangeNewTextPostActionType = {
+  type:'CHANGE-NEW-TEXT-POST'
+  text: string
 }
 
 const store: StoreType  = {
@@ -62,27 +69,37 @@ const store: StoreType  = {
       ]
     }
   },
-  changeNewTextPost(text){
-    this._state = {...this._state, profilePage: {...this._state.profilePage, textForInputPost: text}}
-    console.log(this._state.profilePage.textForInputPost)
-    this._onChange()
-  },
-  addNewPost() {
-    const newPost = {id: v1(), text: this._state.profilePage.textForInputPost}
-    this._state = {...this._state,
-      profilePage: {...this._state.profilePage,
-        posts:[newPost, ...this._state.profilePage.posts], textForInputPost: ''}}
-    this._onChange()
-  },
   _onChange() {
-    console.log(' state change')
+    console.log('state change')
   },
+
   subscribe (callBack) {
     this._onChange = callBack
   },
   getState() {
     return  this._state
+  },
+
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      const newPost = {id: v1(), text: this._state.profilePage.textForInputPost}
+      this._state = {...this._state,
+        profilePage: {...this._state.profilePage,
+          posts:[newPost, ...this._state.profilePage.posts], textForInputPost: ''}}
+      this._onChange()
+    } else if (action.type === 'CHANGE-NEW-TEXT-POST') {
+      this._state = {...this._state, profilePage: {...this._state.profilePage, textForInputPost: action.text}}
+      this._onChange()
+    }
   }
+
+}
+
+export const addPostAC = (): AddPostActionType  =>  {
+  return {type:'ADD-POST'}
+}
+export const changeNewPostTextAC = (text: string): ChangeNewTextPostActionType =>  {
+  return {type:'CHANGE-NEW-TEXT-POST', text}
 }
 
 export default store

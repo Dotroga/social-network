@@ -24,8 +24,7 @@ const App: React.FC<AppPropsType> = ({store}) => {
             <Route path='/profile' element={
               <Profile
                 profilePage={state.profilePage}
-                textPostHandler={store.changeNewTextPost.bind(store)}
-                addNewPost={store.addNewPost.bind(store)}/>
+                dispatch={store.dispatch.bind(store)}/>
             }/>
             <Route path='/messages' element={
               <Dialogs
