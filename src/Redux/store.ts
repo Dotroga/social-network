@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {log} from "util";
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 export type PostType = {
   id: string
@@ -86,31 +87,9 @@ const store: StoreType  = {
   },
 
   dispatch(action) {
-    if (action.type === 'WRITING-NEW_POST') {
-      this._state = {...this._state, profilePage: {...this._state.profilePage,
-          textForInputPost: action.text}}
-      this._onChange()
-    } else if (action.type === 'ADD-POST') {
-      const newPost = {id: v1(), text: this._state.profilePage.textForInputPost,like: 0}
-      this._state = {...this._state,
-        profilePage: {...this._state.profilePage,
-          posts:[newPost, ...this._state.profilePage.posts], textForInputPost: ''}}
-      this._onChange()
-    } else if (action.type === 'WRITING-NEW-MESSAGE') {
-      this._state = {...this._state, dialogs:{...this._state.dialogs,
-          textForInputMessages: action.text} }
-      this._onChange()
-    } else if (action.type === 'ADD-MESSAGE') {
-      const message = {id: v1(), message: this._state.dialogs.textForInputMessages}
-      this._state = {...this._state, dialogs: {...this._state.dialogs,
-        messages: [...this._state.dialogs.messages, message], textForInputMessages: ''}}
-      this._onChange()
-    } else if (action.type === 'ADD-LIKE') {
-      this._state = {...this._state, profilePage: {...this._state.profilePage,
-          posts: this._state.profilePage.posts.map(p=>p.id === action.postId
-              ? {...p, like: p.like + 1} : p)}}
-      this._onChange()
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.dialogs = dialogsReducer(this._state.dialogs, action)
+    this._onChange()
   }
 }
 
