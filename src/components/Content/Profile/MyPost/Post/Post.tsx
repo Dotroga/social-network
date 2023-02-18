@@ -9,6 +9,7 @@ type PostPropsType = {
 }
 
 const Post: React.FC<PostPropsType> = ({posts, dispatch}) => {
+
   const addLike = (postsId: string) => {
     dispatch(addLikeAC(postsId))
   }

@@ -1,7 +1,15 @@
 import {v1} from "uuid";
 import {ActionsType, ProfilePageType} from "./store";
 
-const profileReducer = (state: ProfilePageType , action:ActionsType) => {
+const initialState: ProfilePageType = {
+  posts: [
+    {id: v1(), text: 'Hi, how are you?',like: 7},
+    {id: v1(), text: 'I am Better all!',like: 2}
+  ],
+    textForInputPost: ''
+}
+
+const profileReducer = (state= initialState, action:ActionsType) => {
   if (action.type === 'WRITING-NEW_POST') {
     state = {...state, textForInputPost: action.text}
   } else if (action.type === 'ADD-POST') {

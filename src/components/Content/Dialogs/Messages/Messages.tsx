@@ -5,18 +5,25 @@ import {ActionsType, addMessageAC, DialogsType, writingNewMessagesAC} from "../.
 
 type MessagesPropsType = {
   dialogs: DialogsType
-  dispatch: (action: ActionsType) => void
+  onChangeMessages: (text: string)=> void
+  addMessage:()=> void
 }
 
-const Messages: React.FC<MessagesPropsType> = ({dialogs, dispatch}) => {
-  const onChangeMessages = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(writingNewMessagesAC(e.currentTarget.value))
+const Messages: React.FC<MessagesPropsType> = (
+  {
+    dialogs,
+    onChangeMessages,
+    addMessage
+  }) => {
+  const onChangeMessagesHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    onChangeMessages(e.currentTarget.value)
   }
-  const addMessage = () => dispatch(addMessageAC())
+  const addMessageHandler = () => addMessage()
+
   return (
     <div className={s.messages}>
-      <textarea onChange={onChangeMessages} value={dialogs.textForInputMessages}></textarea>
-      <button onClick={addMessage} >Add</button>
+      <textarea onChange={onChangeMessagesHandler} value={dialogs.textForInputMessages}></textarea>
+      <button onClick={addMessageHandler } >Add</button>
       {dialogs.messages.map(m=><div key={m.id}>{m.message}</div>)}
     </div>
   );

@@ -4,11 +4,12 @@ import Profile from "./components/Content/Profile/Profile";
 import s from'./App.module.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
-import {StoreType} from "./Redux/store";
+
+
 
 
 type AppPropsType = {
-  store: StoreType
+  store: any
 }
 
 const App: React.FC<AppPropsType> = ({store}) => {
@@ -23,12 +24,12 @@ const App: React.FC<AppPropsType> = ({store}) => {
           <Routes>
             <Route path='/profile' element={
               <Profile
-                profilePage={state.profilePage}
+                profilePage={state.profileReducer && state.profileReducer}
                 dispatch={store.dispatch.bind(store)}/>
             }/>
             <Route path='/messages' element={
               <Dialogs
-                dialogs={state.dialogs}
+                dialogs={state.dialogsReducer && state.dialogsReducer}
                 dispatch={store.dispatch.bind(store)}/>
             }/>
             {/*<Route path='/news' element={<News />}/>*/}
