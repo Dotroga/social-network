@@ -8,13 +8,8 @@ export type MessagesType = {
   id: string
   message: string
 }
-export type DialogsType = {
-  dialogsUsers: DialogsUsersType[]
-  messages: MessagesType[]
-  textForInputMessages: string
-}
 
-export const initialState: DialogsType = {
+export const initialState = {
     dialogsUsers: [
       {id: v1(), name: 'Vasili'},
       {id: v1(), name: 'Evgeniy'},
@@ -24,18 +19,20 @@ export const initialState: DialogsType = {
       {id: v1(), name: 'Roma'},
       {id: v1(), name: 'Timur'},
       {id: v1(), name: 'Andreu'}
-    ],
+    ] as  DialogsUsersType[],
     messages: [
       {id: v1(), message: 'Hi!'},
       {id: v1(), message: 'Where are you from'},
       {id: v1(), message: 'How are you?'},
       {id: v1(), message: 'I started studying mobile development !'},
       {id: v1(), message: "Cool, and I'm currently studying react, doing a big project"}
-    ],
+    ] as MessagesType[],
     textForInputMessages: ''
 }
 
-const dialogsReducer = (state = initialState, action:ActionsType):DialogsType => {
+export type DialogsType = typeof initialState
+
+const dialogsReducer = (state:DialogsType = initialState, action:ActionsType):DialogsType => {
   switch (action.type) {
     case "ADD-MESSAGE": {
       const message = {id: v1(), message: state.textForInputMessages}

@@ -1,11 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
-import {
-  ActionsType, addPostAC,
-  writingNewPostAC,
-  ProfilePageType
-} from "../../../Redux/store";
+import {ActionsType, addPostAC, ProfilePageType, writingNewPostAC} from "../../../Redux/profileReducer";
+
+
 
 
 type ProfilePropsType = {
