@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './DialogsUsers.module.css'
-import {DialogsUsersType} from "../../../../Redux/store";
+import {DialogsUsersType} from "../../../../Redux/dialogsReducer";
+
 
 
 

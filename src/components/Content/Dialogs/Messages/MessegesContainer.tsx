@@ -1,24 +1,30 @@
 import React from 'react';
-import {ActionsType, addMessageAC, DialogsType, writingNewMessagesAC} from "../../../../Redux/store";
 import Messages from "./Messages";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../../Redux/reduxStore";
+import {addMessageAC, DialogsType, writingNewMessagesAC} from "../../../../Redux/dialogsReducer";
+import {Dispatch} from "redux";
 
-
-type MessagesPropsType = {
+type MapStatePropsType = {
   dialogs: DialogsType
-  dispatch: (action: ActionsType) => void
+}
+type MapDispatchToProps = {
+  onChangeMessages: (text: string) => void
+  addMessage: () => void
 }
 
-const MessagesContainer: React.FC<MessagesPropsType> = ({dialogs, dispatch}) => {
+const mapStateToProps = (state: AppStateType):MapStatePropsType => {
+  return {
+    dialogs: state.dialogsReducer
+  }
+}
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToProps => {
+  return {
+    onChangeMessages: (text: string) => dispatch(writingNewMessagesAC(text)),
+    addMessage: () => dispatch(addMessageAC())
+  }
+}
 
-  const onChangeMessages = (text: string) => dispatch(writingNewMessagesAC(text))
-  const addMessage = () => dispatch(addMessageAC())
-
-  return (
-    <Messages
-    onChangeMessages={onChangeMessages}
-    addMessage={addMessage}
-    dialogs={dialogs}
-  />);
-};
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
 
 export default MessagesContainer;

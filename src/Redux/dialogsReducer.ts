@@ -1,7 +1,20 @@
 import {v1} from "uuid";
-import {ActionsType, DialogsType} from "./store";
 
-const initialState: DialogsType = {
+export type DialogsUsersType = {
+  id: string
+  name: string
+}
+export type MessagesType = {
+  id: string
+  message: string
+}
+export type DialogsType = {
+  dialogsUsers: DialogsUsersType[]
+  messages: MessagesType[]
+  textForInputMessages: string
+}
+
+export const initialState: DialogsType = {
     dialogsUsers: [
       {id: v1(), name: 'Vasili'},
       {id: v1(), name: 'Evgeniy'},
@@ -23,13 +36,22 @@ const initialState: DialogsType = {
 }
 
 const dialogsReducer = (state = initialState, action:ActionsType):DialogsType => {
-  if (action.type === 'WRITING-NEW-MESSAGE') {
-    state = {...state, textForInputMessages: action.text}
-  } else if (action.type === 'ADD-MESSAGE') {
-    const message = {id: v1(), message: state.textForInputMessages}
-    state = {...state, messages: [...state.messages, message], textForInputMessages: ''}
+  switch (action.type) {
+    case "ADD-MESSAGE": {
+      const message = {id: v1(), message: state.textForInputMessages}
+      return {...state, messages: [...state.messages, message], textForInputMessages: ''}
+    }
+    case "WRITING-NEW-MESSAGE": {
+      return {...state, textForInputMessages: action.text}
+    }
+    default:
+      return state
   }
-  return state
 }
+
+export type ActionsType = ReturnType<typeof writingNewMessagesAC> | ReturnType<typeof addMessageAC>
+
+export const writingNewMessagesAC = (text: string) => ({type:'WRITING-NEW-MESSAGE', text}) as const
+export const addMessageAC = () => ({type: 'ADD-MESSAGE'}) as const
 
 export default dialogsReducer
