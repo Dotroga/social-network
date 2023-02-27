@@ -3,9 +3,6 @@ import s from './DialogsUsers.module.css'
 import {DialogsUsersType} from "../../../../Redux/dialogsReducer";
 
 
-
-
-
 type DialogsPropsType = {
   dialogsUsers: DialogsUsersType[]
 }

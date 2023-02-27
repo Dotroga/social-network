@@ -2,7 +2,9 @@ import React from 'react';
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../Redux/reduxStore";
-import {addMessageAC, DialogsType, writingNewMessagesAC} from "../../../../Redux/dialogsReducer";
+import {addMessageAC
+  , DialogsType, writingNewMessagesAC
+} from "../../../../Redux/dialogsReducer";
 import {Dispatch} from "redux";
 
 type MapStatePropsType = {
