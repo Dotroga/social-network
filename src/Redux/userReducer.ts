@@ -1,13 +1,13 @@
 import {v1} from "uuid";
 
-type UserType = {
+export type UserType = {
   id: string
   fullName: string
   follow : boolean
   status: string
   country: string
 }
-type UsersType =  {users: UserType[]}
+export type UsersType =  {users: UserType[]}
 
 const initialState: UsersType  = {
   users: [
@@ -17,10 +17,10 @@ const initialState: UsersType  = {
   ]
 }
 
-const userReducer = (state: UsersType = initialState, action: TharType ) => {
+const usersReducer = (state: UsersType = initialState, action: TharType ) => {
   switch (action.type) {
     case "FOLLOW": {
-      return state.users.map(u=>u.id === action.id ? {...u, follow: !u.follow} : u)
+      return {...state, users: state.users.map(u=>u.id === action.id ? {...u, follow: !u.follow} : u)}
     }
     case "SET-USERS": {
       return {...state, users: [...state.users, ...action.users]}
@@ -33,10 +33,9 @@ type TharType = FollowACType | SetUsersACType
 type FollowACType = ReturnType<typeof followAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 
-export const followAC = (id: string) => ({type: 'FOLLOW', id} as const)
 export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
+export const followAC = (id: string) => ({type: 'FOLLOW', id} as const)
 
-
-export default userReducer
+export default usersReducer
 
 
