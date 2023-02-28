@@ -4,13 +4,14 @@ import UsersList from "./UsersList";
 import {AppStateType} from "../../../Redux/reduxStore";
 import {followAC, setUsersAC, UsersType, UserType} from "../../../Redux/userReducer";
 import {Dispatch} from "redux";
-import MessagesContainer from "../Dialogs/Messages/MessegesContainer";
-
-
 
 
 type MapStateToPropsType = {
   users : UsersType
+}
+type MapDispatchToProps = {
+  setUsers: (users: UserType[]) => void
+  follow: (id: string) => void
 }
 
 const  mapStateToProps = (state: AppStateType):MapStateToPropsType=> {
@@ -19,7 +20,7 @@ const  mapStateToProps = (state: AppStateType):MapStateToPropsType=> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToProps => {
   return {
     setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
     follow: (id: string) => dispatch(followAC(id))

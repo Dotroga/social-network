@@ -1,29 +1,31 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
-import {ActionsType, addPostAC, ProfilePageType, writingNewPostAC} from "../../../Redux/profileReducer";
+import {ProfilePageType} from "../../../Redux/profileReducer";
 
 
 
 
 type ProfilePropsType = {
-  profilePage: ProfilePageType
-  dispatch: (action: ActionsType)=>void
+  profile: ProfilePageType
+  writingNewPost: (text: string)=> void
+  addPost: ()=> void
+  addLike: (id: string)=> void
 }
 const Profile: React.FC<ProfilePropsType> = (
   {
-    profilePage,
-    dispatch
+    profile,
+    writingNewPost,
+    addPost,
+    addLike,
   }) => {
 
   const textPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.currentTarget.value
-    dispatch(writingNewPostAC(text))
+    writingNewPost(text)
   }
   const pureOnEnter = (e: KeyboardEvent<HTMLTextAreaElement>) =>
    e.key === 'Enter' && addPost
-
-  const addPost = () => dispatch(addPostAC())
 
   return (
     <div className='container'>
@@ -33,7 +35,7 @@ const Profile: React.FC<ProfilePropsType> = (
             <textarea
               onChange={textPostChange}
               onKeyDown={pureOnEnter}
-              value={profilePage.textForInputPost}
+              value={profile.textForInputPost}
               placeholder={'text'}/>
           <button
             onClick={addPost}
@@ -41,7 +43,7 @@ const Profile: React.FC<ProfilePropsType> = (
           </button>
         </div>
       </div>
-      <MyPost posts={profilePage.posts} dispatch={dispatch}/>
+      <MyPost posts={profile.posts} addLike={addLike}/>
     </div>
 
   );

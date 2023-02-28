@@ -1,11 +1,10 @@
 import React from 'react';
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Content/Profile/Profile";
 import s from'./App.module.css';
 import {Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
-import UsersList from "./components/Content/Users/UsersList";
 import UsersContainer from "./components/Content/Users/UsersContainer";
+import ProfileContainer from "./components/Content/Profile/MyPost/ProfileContainer";
 
 
 type AppPropsType = {
@@ -21,13 +20,8 @@ const App: React.FC<AppPropsType> = ({store}) => {
         <Navbar/>
         <div className={s.content}>
           <Routes>
-            <Route path='/profile' element={
-              <Profile
-                profilePage={state.profileReducer && state.profileReducer}
-                dispatch={store.dispatch.bind(store)}/>
-            }/>
-            <Route path='/messages' element={
-              <Dialogs
+            <Route path='/profile' element={<ProfileContainer/>}/>
+            <Route path='/messages' element={<Dialogs
                 dialogs={state.dialogsReducer && state.dialogsReducer}
               />
             }/>

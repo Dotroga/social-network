@@ -1,20 +1,16 @@
 import React from 'react';
 import s from './Post.module.css'
-import {addLikeAC, PostType} from "../../../../../Redux/profileReducer";
-import {ActionsType} from "../../../../../Redux/profileReducer";
+import {PostType} from "../../../../../Redux/profileReducer";
+
 
 
 
 type PostPropsType = {
   posts: PostType[]
-  dispatch: (action: ActionsType)=>void
+  addLike: (id: string)=>void
 }
 
-const Post: React.FC<PostPropsType> = ({posts, dispatch}) => {
-
-  const addLike = (postId: string) => {
-    dispatch(addLikeAC(postId))
-  }
+const Post: React.FC<PostPropsType> = ({posts, addLike}) => {
 
   return (
     <div>
