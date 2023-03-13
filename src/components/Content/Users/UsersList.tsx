@@ -1,20 +1,35 @@
 import React from 'react';
-import {UsersType, UserType} from "../../../Redux/userReducer";
+import {UserType} from "../../../Redux/userReducer";
+import axios from "axios";
+import profileIcon from './../../../img/profileIconSmall.png'
 
 type UsersListPropsType = {
-  users: UsersType
+  users: UserType []
   setUsers: (users: UserType[]) => void
   follow: (id: string) => void
 }
 
 const UsersList: React.FC<UsersListPropsType> = (
   {users, setUsers, follow}) => {
+  if (users.length === 0) {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+      .then(response => {
+        setUsers(response.data.items)
+      })
 
+  }
   return (
     <div>
-      {users.users.map(u=>{
+      {users.map(u=>{
         return (<div key={u.id}>
-          {u.fullName}
+          <div>
+            <img
+              style={{width: '100px'}}
+              src={u.photos.small ? u.photos.small : profileIcon}
+              alt=""
+            />
+            {u.name}
+          </div>
           <button onClick={()=>follow(u.id)}>
             {u.follow ? 'Follow' : 'Unfollow'}
           </button>
