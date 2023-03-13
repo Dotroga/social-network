@@ -11,15 +11,17 @@ type UsersListPropsType = {
 
 const UsersList: React.FC<UsersListPropsType> = (
   {users, setUsers, follow}) => {
-  if (users.length === 0) {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users')
-      .then(response => {
-        setUsers(response.data.items)
-      })
-
+  const setUsersHandler = () => {
+    if (users.length === 0) {
+      axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(response => {
+          setUsers(response.data.items)
+        })
+    }
   }
   return (
     <div>
+      <button onClick={setUsersHandler}>Set users</button>
       {users.map(u=>{
         return (<div key={u.id}>
           <div>
