@@ -11,10 +11,9 @@ type UsersListPropsType = {
 
 class Users extends React.Component<UsersListPropsType, UserType []> { // наследуем классову компоненту у реакта
 
-  constructor(props: UsersListPropsType) {
-    super(props);
-      axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        .then(response => this.props.setUsers(response.data.items))
+  componentDidMount() {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+      .then(response => this.props.setUsers(response.data.items))
   }
 
   render() {
