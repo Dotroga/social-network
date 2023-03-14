@@ -21,18 +21,18 @@ const usersReducer = (state: UserType[] = [], action: TharType ):UserType[] => {
     case "FOLLOW": {
       return state.map(u=>u.id === action.id ? {...u, follow: !u.follow} : u)
     }
-    case "SET-USERS": {
+    case "GET-USERS": {
       return [...state, ...action.users]
     }
     default:
       return state
   }
 }
-type TharType = FollowACType | SetUsersACType
+type TharType = FollowACType | GetUsersACType
 type FollowACType = ReturnType<typeof followAC>
-type SetUsersACType = ReturnType<typeof setUsersAC>
+type GetUsersACType = ReturnType<typeof getUsersAC>
 
-export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
+export const getUsersAC = (users: UserType[]) => ({type: 'GET-USERS', users} as const)
 export const followAC = (id: string) => ({type: 'FOLLOW', id} as const)
 
 

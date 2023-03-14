@@ -1,7 +1,7 @@
-import React from 'react';
-import {UserType} from "../../../Redux/userReducer";
+import React from "react";
+import profileIcon from "../../../img/profileIconSmall.png";
 import axios from "axios";
-import profileIcon from './../../../img/profileIconSmall.png'
+import {UserType} from "../../../Redux/userReducer";
 
 type UsersListPropsType = {
   users: UserType []
@@ -9,20 +9,17 @@ type UsersListPropsType = {
   follow: (id: string) => void
 }
 
-const UsersList: React.FC<UsersListPropsType> = (
-  {users, setUsers, follow}) => {
-  const setUsersHandler = () => {
-    if (users.length === 0) {
+class Users extends React.Component<UsersListPropsType, UserType []> { // наследуем классову компоненту у реакта
+
+  constructor(props: UsersListPropsType) {
+    super(props);
       axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        .then(response => {
-          setUsers(response.data.items)
-        })
-    }
+        .then(response => this.props.setUsers(response.data.items))
   }
-  return (
-    <div>
-      <button onClick={setUsersHandler}>Set users</button>
-      {users.map(u=>{
+
+  render() {
+    return  <div>
+      {this.props.users.map(u=>{
         return (<div key={u.id}>
           <div>
             <img
@@ -32,13 +29,12 @@ const UsersList: React.FC<UsersListPropsType> = (
             />
             {u.name}
           </div>
-          <button onClick={()=>follow(u.id)}>
+          <button onClick={()=>this.props.follow(u.id)}>
             {u.follow ? 'Follow' : 'Unfollow'}
           </button>
         </div>)
       })}
     </div>
-  );
-};
-
-export default UsersList;
+  }
+}
+export default Users
