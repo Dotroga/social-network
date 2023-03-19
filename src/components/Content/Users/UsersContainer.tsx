@@ -5,35 +5,22 @@ import {
   followAC,
   getUsersAC,
   setCurrentPageAC,
-  setTotalCountAC,
+  setTotalCountAC, toggleIsFetchingAC,
   UsersPageType,
-  UserType
 } from "../../../Redux/userReducer";
-import {Dispatch} from "redux";
-import Users from "./UsersApiContainer";
-
-type MapDispatchToProps = {
-  setUsers: (users: UserType[]) => void
-  follow: (id: string) => void
-  setCurrentPage: (currentPage: number) => void
-  setTotalCount: (totalCount: number) => void
-}
+import UsersApiContainer from "./UsersApiContainer";
 
 const mapStateToProps = (state: AppStateType):UsersPageType=> {
-  return {
-    users: state.usersReducer.users,
-    pageSize: state.usersReducer.pageSize,
-    totalUsersCount: state.usersReducer.totalUsersCount,
-    currentPage: state.usersReducer.currentPage
-  }
+  const {users, pageSize, totalUsersCount, currentPage, isFetching} = state.usersReducer
+  return {users, pageSize, totalUsersCount, currentPage, isFetching}
 }
-const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToProps => {
-  return {
-    setUsers: (users: UserType[]) => dispatch(getUsersAC(users)),
-    follow: (id: string) => dispatch(followAC(id)),
-    setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
-    setTotalCount:  (totalCount: number) => dispatch(setTotalCountAC(totalCount))
-  }
-}
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+
+export const UsersContainer = connect(mapStateToProps, {
+  setUsers: getUsersAC,
+  follow: followAC,
+  setCurrentPage: setCurrentPageAC,
+  setTotalCount: setTotalCountAC,
+  toggleIsFetching: toggleIsFetchingAC
+})(UsersApiContainer)
+
 
