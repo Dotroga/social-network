@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import s from'./App.module.css';
 import {Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
-import UsersContainer from "./components/Content/Users/UsersContainer";
+import {UsersContainer} from "./components/Content/Users/UsersContainer";
 import ProfileContainer from "./components/Content/Profile/MyPost/ProfileContainer";
 
 

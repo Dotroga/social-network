@@ -1,0 +1,9 @@
+.activePage {
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+.page {
+    cursor: pointer;
+    margin: 3px;
+}
