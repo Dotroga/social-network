@@ -33,9 +33,10 @@ export type ActionsType =
   ReturnType<typeof writingNewPostAC>
   | ReturnType<typeof addPostAC>
   | ReturnType<typeof addLikeAC>
+  | ReturnType<typeof setUsersProfile>
 
 export const writingNewPostAC = (text: string) => ({type:'WRITING-NEW_POST', text}) as const
 export const addPostAC = () =>  ({type:'ADD-POST'}) as const
 export const addLikeAC = (postId: string) => ({type: 'ADD-LIKE', postId}) as const
-
+export const setUsersProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}) as const
 export default profileReducer
