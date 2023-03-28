@@ -1,26 +1,30 @@
 import React from 'react';
 import {Profile} from "./Profile";
-import {connect, MapDispatchToProps} from "react-redux";
-import {AppStateType} from "../../../Redux/reduxStore";
-import {addLikeAC, addPostAC, ProfilePageType, setUsersProfile, writingNewPostAC} from "../../../Redux/profileReducer";
+import {connect} from "react-redux";
 import axios from "axios";
+import {setUsersProfile} from "../../../Redux/profileReducer";
+import {AppStateType} from "../../../Redux/reduxStore";
+import MyPostContainer from "./MyPost/MyPostContainer";
 
+type ProfilePropsType = {
+  setUsersProfile: (profile: any) => void
+  profile: any
+}
 
+class ProfileContainer extends React.Component<ProfilePropsType>{
 
-export class ProfileContainerApi extends React.Component<any, any>{
   componentDidMount() {
     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
       .then(response => {
         this.props.setUsersProfile(response.data)
       })
   }
-
   render = () => {
-    console.log({...this.props})
-    return <Profile
-      {...this.props}
-
-    />
+    console.log(this.props)
+    return <>
+      <Profile {...this.props}/>
+      <MyPostContainer/>
+    </>
   }
 }
 
@@ -30,13 +34,12 @@ export class ProfileContainerApi extends React.Component<any, any>{
 //   addPost: () => dispatch(addPostAC()),
 //   addLike: (id: string) => dispatch(addLikeAC(id))
 // })
-const mapStateToProps = (state: any)=>({
-  a:13
-})
-export const ProfileContainer =  connect(
+
+const mapStateToProps = (state: AppStateType)=>({profile: {...state.profileReducer}})
+export default connect(
   mapStateToProps,
   {setUsersProfile}
-) (ProfileContainerApi)
+) (ProfileContainer)
 
 
 

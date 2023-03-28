@@ -20,21 +20,20 @@ type UsersListPropsType = {
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
-  setUsers: (users: UserType[]) => void
+  getUsers: (users: UserType[]) => void
   follow: (id: string) => void
   setCurrentPage: (currentPage: number) => void
   setTotalCount: (totalCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
 }
-
-export class UsersContainerApi extends React.Component<UsersListPropsType, UserType []> { // наследуем классову компоненту у реакта
+class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { // наследуем классову компоненту у реакта
 
   componentDidMount() {
     this.props.toggleIsFetching(true)
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
       .then(response => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
+        this.props.getUsers(response.data.items)
         this.props.setTotalCount(response.data.totalCount)
       })
   }
@@ -45,7 +44,7 @@ export class UsersContainerApi extends React.Component<UsersListPropsType, UserT
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
       .then(response => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
+        this.props.getUsers(response.data.items)
       })
 
   }
@@ -69,7 +68,9 @@ export class UsersContainerApi extends React.Component<UsersListPropsType, UserT
   }
 }
 
-export const UsersContainer = connect(
+export default connect(
   (state: AppStateType): UsersPageType => ({...state.usersReducer}),
   {getUsers, follow, setCurrentPage, setTotalCount, toggleIsFetching}
-)(UsersContainerApi)
+)(UsersContainer)
+
+
