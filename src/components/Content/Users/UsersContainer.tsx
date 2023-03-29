@@ -13,6 +13,7 @@ import Users from "./Users";
 import Loading from './../../../img/loading.svg'
 import {AppStateType} from "../../../Redux/reduxStore";
 import {connect} from "react-redux";
+import {setUsersId} from "../../../Redux/profileReducer";
 
 type UsersListPropsType = {
   users: UserType []
@@ -25,6 +26,7 @@ type UsersListPropsType = {
   setCurrentPage: (currentPage: number) => void
   setTotalCount: (totalCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
+  setUsersId: (id: string) => void
 }
 class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { // наследуем классову компоненту у реакта
 
@@ -63,14 +65,15 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
         pages={pages}
         currentPage={this.props.currentPage}
         onPageChanged={this.onPageChanged}
-        follow={this.props.follow}/>
+        follow={this.props.follow}
+        setUsersId={this.props.setUsersId}/>
     </>
   }
 }
 
 export default connect(
   (state: AppStateType): UsersPageType => ({...state.usersReducer}),
-  {getUsers, follow, setCurrentPage, setTotalCount, toggleIsFetching}
+  {getUsers, follow, setCurrentPage, setTotalCount, toggleIsFetching, setUsersId}
 )(UsersContainer)
 
 
