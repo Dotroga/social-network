@@ -5,7 +5,7 @@ import {
   getUsers,
   setCurrentPage,
   setTotalCount,
-  toggleIsFetching,
+  toggleIsFetching, unfollow,
   UsersPageType,
   UserType
 } from "../../../Redux/userReducer";
@@ -23,6 +23,7 @@ type UsersListPropsType = {
   isFetching: boolean
   getUsers: (users: UserType[]) => void
   follow: (id: string) => void
+  unfollow: (id: string) => void
   setCurrentPage: (currentPage: number) => void
   setTotalCount: (totalCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
@@ -32,7 +33,8 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
 
   componentDidMount() {
     this.props.toggleIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+      {withCredentials: true})
       .then(response => {
         this.props.toggleIsFetching(false)
         this.props.getUsers(response.data.items)
@@ -43,7 +45,8 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
   onPageChanged = (p: number) => {
     this.props.toggleIsFetching(true)
     this.props.setCurrentPage(p)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`,
+      {withCredentials: true})
       .then(response => {
         this.props.toggleIsFetching(false)
         this.props.getUsers(response.data.items)
@@ -66,6 +69,7 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
         currentPage={this.props.currentPage}
         onPageChanged={this.onPageChanged}
         follow={this.props.follow}
+        unfollow={this.props.unfollow}
         setUsersId={this.props.setUsersId}/>
     </>
   }
@@ -73,7 +77,7 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
 
 export default connect(
   (state: AppStateType): UsersPageType => ({...state.usersReducer}),
-  {getUsers, follow, setCurrentPage, setTotalCount, toggleIsFetching, setUsersId}
+  {getUsers, follow, unfollow, setCurrentPage, setTotalCount, toggleIsFetching, setUsersId}
 )(UsersContainer)
 
 

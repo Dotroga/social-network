@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import profileIcon from "../../../img/profileIconSmall.png";
 import {UserType} from "../../../Redux/userReducer";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
   users: UserType []
@@ -10,11 +11,12 @@ type UsersPropsType = {
   currentPage: number
   onPageChanged: (p: number)=>void
   follow: (id: string) => void
+  unfollow: (id: string) => void
   setUsersId: (id: string) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
-  const {users, pages, currentPage, onPageChanged, follow, setUsersId} = props
+  const {users, pages, currentPage, onPageChanged, follow, unfollow, setUsersId} = props
   const navigate = useNavigate()
 
     return(
@@ -41,9 +43,28 @@ const Users: React.FC<UsersPropsType> = (props) => {
               alt=""/>
             {u.name}
           </div>
-          <button onClick={() => follow(u.id)}>
-            {u.follow ? 'Follow' : 'Unfollow'}
-          </button>
+          {u.followed
+          ?  <button onClick={() => {
+              axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                {withCredentials: true,
+                  headers: {'API-KEY': '7bc2302e-d37a-46c7-ba9d-fd7a4a394831'}
+                })
+                .then(response => {
+                  response.data.resultCode === 0 && unfollow(u.id)
+                })
+            }}>{u.followed ?  'Unfollow'  :  'Follow' }</button>
+          :  <button onClick={() => {
+              console.log(u)
+              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                {}, {withCredentials: true,
+                  headers: {'API-KEY': '7bc2302e-d37a-46c7-ba9d-fd7a4a394831'}})
+                .then(response => {
+                  response.data.resultCode === 0 && follow(u.id)
+                  console.log(u.name)
+                  console.log(u.followed)
+                })
+            }}>{u.followed ? 'Unfollow' : 'Follow' }</button>
+              }
         </div>)
     })}
   </div>)
