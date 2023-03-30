@@ -4,10 +4,19 @@ import {NavLink} from "react-router-dom";
 import LogoRedux from './../../img/ReduxLogo.svg'
 import LogoReact from './../../img/ReactLogo.svg'
 
-function Navbar() {
+type NavbarPropsType = {
+  login: string | null
+  isAuth: boolean
+}
+
+const Navbar: React.FC<NavbarPropsType> = (props) => {
+  const {login, isAuth} = props
   return (<div className={s.nav}>
+    <div className={s.logo}>
       <img className={s.redux} src={LogoRedux} alt=""/>
       <img className={s.react} src={LogoReact} alt=""/>
+    </div>
+    <div>{isAuth ? login : 'Login'}</div>
       <div className={s.items}>
         <div className={s.item}>
           <NavLink to="/profile" className={navData=>navData.isActive ? s.active : s.item }>Profile</NavLink>

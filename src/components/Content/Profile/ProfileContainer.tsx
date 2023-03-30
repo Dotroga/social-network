@@ -22,7 +22,6 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
       })
   }
   render = () => {
-    console.log(this.props.profile.userId)
     return <>
       <Profile {...this.props}/>
       <MyPostContainer/>

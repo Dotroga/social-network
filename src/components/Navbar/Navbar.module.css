@@ -3,28 +3,35 @@
     background-color: #e8e8f3;
     border-radius: 10px 0 0 10px;
     margin: 1px;
+    width: 180px;
 }
 
-.items {
-    margin-top: -100px;
-}
+
 .item {
     margin: 6px;
+    z-index: 2;
+}
+.logo {
+height: 60px;
+    z-index: 1;
+    margin-bottom: 30px;
 }
 img.redux {
-    z-index: 2;
     width: 60px;
     display: block;
     margin:  30px auto;
+    user-select: none;
 }
 img.react {
+    height: 120px;
+    top: -121px;
     position: relative;
-    bottom: 121px;
     right: 1px;
-    width: 140px;
     opacity: 0.05;
+    user-select: none;
 }
 .item a{
+    z-index: 2;
     color: #8e8ea9;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;

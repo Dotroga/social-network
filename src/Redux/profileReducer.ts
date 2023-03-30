@@ -1,6 +1,6 @@
 
 const initialState= {
-  userId: '',
+  userId: '25874',
   lookingForAJob: false,
   lookingForAJobDescription: '',
   fullName: '',

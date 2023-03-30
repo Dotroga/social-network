@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from "./components/Navbar/Navbar";
 import s from'./App.module.css';
 import {Route, Routes} from "react-router-dom";
 import Dialogs from "./components/Content/Dialogs/Dialogs";
 import UsersContainer from "./components/Content/Users/UsersContainer";
 import ProfileContainer from "./components/Content/Profile/ProfileContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 
 
@@ -18,7 +18,7 @@ const App: React.FC<AppPropsType> = ({store}) => {
 
     return (
       <div className={s.app}>
-        <Navbar/>
+        <NavbarContainer/>
         <div className={s.content}>
           <Routes>
             <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
