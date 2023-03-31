@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {
   follow,
   getUsers,
@@ -14,6 +13,7 @@ import Loading from './../../../img/loading.svg'
 import {AppStateType} from "../../../Redux/reduxStore";
 import {connect} from "react-redux";
 import {setUsersId} from "../../../Redux/profileReducer";
+import {usersAPI} from "../../../api/api";
 
 type UsersListPropsType = {
   users: UserType []
@@ -33,29 +33,23 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
 
   componentDidMount() {
     this.props.toggleIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-      {withCredentials: true})
-      .then(response => {
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
         this.props.toggleIsFetching(false)
-        this.props.getUsers(response.data.items)
-        this.props.setTotalCount(response.data.totalCount)
+        this.props.getUsers(data.items)
+        this.props.setTotalCount(data.totalCount)
       })
   }
 
-  onPageChanged = (p: number) => {
+  onPageChanged = (pageNumber: number) => {
     this.props.toggleIsFetching(true)
-    this.props.setCurrentPage(p)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`,
-      {withCredentials: true})
-      .then(response => {
+    this.props.setCurrentPage(pageNumber)
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
         this.props.toggleIsFetching(false)
-        this.props.getUsers(response.data.items)
+        this.props.getUsers(data.items)
       })
-
   }
 
   render() {
-
     let pageCount =  Math.ceil(this.props.totalUsersCount / this.props.pageSize)
     let pages = []
     for (let i = 1; i <= pageCount; i++) {

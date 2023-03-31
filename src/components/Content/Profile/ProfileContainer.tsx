@@ -1,10 +1,10 @@
 import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import axios from "axios";
 import {ProfileType, setUsersProfile} from "../../../Redux/profileReducer";
 import {AppStateType} from "../../../Redux/reduxStore";
 import MyPostContainer from "./MyPost/MyPostContainer";
+import {profileAPI} from "../../../api/api";
 
 
 type ProfilePropsType = {
@@ -15,11 +15,8 @@ type ProfilePropsType = {
 class ProfileContainer extends React.Component<ProfilePropsType>{
 
   componentDidMount() {
-    const userId = this.props.profile.userId
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then(response => {
-        this.props.setUsersProfile(response.data)
-      })
+    profileAPI.getUserProfile(this.props.profile.userId).then(data =>
+      this.props.setUsersProfile(data))
   }
   render = () => {
     return <>

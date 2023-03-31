@@ -31,8 +31,7 @@ export const profileReducer = (state:ProfileType = initialState , action:Actions
   }
 }
 
-type ActionsType =
-  ReturnType<typeof setUsersProfile>
+type ActionsType = ReturnType<typeof setUsersProfile>
 | ReturnType<typeof setUsersId>
 
 export const setUsersProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}) as const

@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from "./Navbar";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {AuthType, setUserData} from "../../Redux/authReducer";
+import {authAPI} from "../../api/api";
 
 
 
@@ -16,10 +16,9 @@ type NavbarPropsType = {
 
 class NavbarContainer extends React.Component<NavbarPropsType>{
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-      .then(response => {
-        response.data.resultCode === 0 && this.props.setUserData(response.data.data)
-      })
+    authAPI.isAuthorizationMe().then(data => {
+      return  data.resultCode === 0 && this.props.setUserData(data.data)
+    })
   }
 
   render () {
