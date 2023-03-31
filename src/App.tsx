@@ -18,18 +18,18 @@ const App: React.FC<AppPropsType> = ({store}) => {
 
     return (
       <div className={s.app}>
-        <NavbarContainer/>
-        <div className={s.content}>
-          <Routes>
-            <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
-            <Route path='/messages' element={<Dialogs
+          <NavbarContainer/>
+          <div className={s.content}>
+            <Routes>
+              <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
+              <Route path='/messages' element={<Dialogs
                 dialogs={state.dialogsReducer && state.dialogsReducer}
               />
-            }/>
-            {/*<Route path='/news' element={<News />}/>*/}
-            <Route path='/users' element={<UsersContainer/>}/>
-            {/*<Route path='/Settings' element={<Settings />}/>*/}
-          </Routes>
+              }/>
+              {/*<Route path='/news' element={<News />}/>*/}
+              <Route path='/users' element={<UsersContainer/>}/>
+              {/*<Route path='/Settings' element={<Settings />}/>*/}
+            </Routes>
         </div>
       </div>
   );
