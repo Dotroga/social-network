@@ -50,16 +50,22 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
   }
 
   render() {
-    let pageCount =  Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pageCount; i++) {
-      pages.push(i)
+    const  pageCount =  Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+    const currentPage = this.props.currentPage
+    const pages = () => {
+      const pages = [1]
+      for (let i = currentPage - 8; i < currentPage + 8; i++)
+        i <= 1 || i < pageCount && pages.push(i)
+      pages.push(pageCount)
+      return pages
     }
+
+
     return<>
       {this.props.isFetching && <img src={Loading} alt="loading"/>}
       <Users
         users={this.props.users}
-        pages={pages}
+        pages={pages()}
         currentPage={this.props.currentPage}
         onPageChanged={this.onPageChanged}
         follow={this.props.follow}
