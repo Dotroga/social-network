@@ -1,7 +1,7 @@
 import React from 'react';
-import s from "./Users.module.css";
 import {UserType} from "../../../Redux/userReducer";
 import User from "./User/User";
+import Pagination from "./Pagination";
 
 type UsersPropsType = {
   users: UserType []
@@ -12,21 +12,14 @@ type UsersPropsType = {
   follow: (id: string) => void
   unfollow: (id: string) => void
   setUsersId: (id: string) => void
-  toggleIsFollowingProgress: (progress: boolean, id: string) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
-  const {users, pages, currentPage, onPageChanged, follow, unfollow, setUsersId,
-    toggleIsFollowingProgress, followingInProgress} = props
+  const {users, pages, currentPage, onPageChanged, follow, unfollow, setUsersId, followingInProgress} = props
+
   return (
     <div>
-      {pages.map((p, i) =>
-       <span
-         key={i}
-         className={currentPage === p ? s.activePage : s.page}
-         onClick={() => onPageChanged(p)}>
-         {p}
-       </span>)}
+      <Pagination pages={pages} currentPage={currentPage} callBack={onPageChanged}/>
       {users.map(u =>
         <User
           disabled={followingInProgress.some(id=>id === u.id)}
@@ -35,7 +28,6 @@ const Users: React.FC<UsersPropsType> = (props) => {
           follow={follow}
           unfollow={unfollow}
           setUsersId={setUsersId}
-          toggleIsFollowingProgress={toggleIsFollowingProgress}
         />
       )}
     </div>)
