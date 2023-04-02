@@ -7,14 +7,17 @@ type UsersPropsType = {
   users: UserType []
   pages: number[]
   currentPage: number
+  followingInProgress: string[]
   onPageChanged: (p: number)=>void
   follow: (id: string) => void
   unfollow: (id: string) => void
   setUsersId: (id: string) => void
+  toggleIsFollowingProgress: (progress: boolean, id: string) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {
-  const {users, pages, currentPage, onPageChanged, follow, unfollow, setUsersId} = props
+  const {users, pages, currentPage, onPageChanged, follow, unfollow, setUsersId,
+    toggleIsFollowingProgress, followingInProgress} = props
   return (
     <div>
       {pages.map((p, i) =>
@@ -25,7 +28,15 @@ const Users: React.FC<UsersPropsType> = (props) => {
          {p}
        </span>)}
       {users.map(u =>
-        <User user={u} follow={follow} unfollow={unfollow} setUsersId={setUsersId}/>
+        <User
+          disabled={followingInProgress.some(id=>id === u.id)}
+          key={u.id}
+          user={u}
+          follow={follow}
+          unfollow={unfollow}
+          setUsersId={setUsersId}
+          toggleIsFollowingProgress={toggleIsFollowingProgress}
+        />
       )}
     </div>)
 };

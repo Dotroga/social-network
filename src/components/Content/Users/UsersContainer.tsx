@@ -4,7 +4,7 @@ import {
   getUsers,
   setCurrentPage,
   setTotalCount,
-  toggleIsFetching, unfollow,
+  toggleIsFetching, toggleIsFollowingProgress, unfollow,
   UsersPageType,
   UserType
 } from "../../../Redux/userReducer";
@@ -21,6 +21,7 @@ type UsersListPropsType = {
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
+  followingInProgress:  string[]
   getUsers: (users: UserType[]) => void
   follow: (id: string) => void
   unfollow: (id: string) => void
@@ -28,6 +29,7 @@ type UsersListPropsType = {
   setTotalCount: (totalCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
   setUsersId: (id: string) => void
+  toggleIsFollowingProgress: (progress: boolean, id: string) => void
 }
 class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { // наследуем классову компоненту у реакта
 
@@ -50,6 +52,7 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
   }
 
   render() {
+    console.log(this.props.followingInProgress)
     const  pageCount =  Math.ceil(this.props.totalUsersCount / this.props.pageSize)
     const currentPage = this.props.currentPage
     const pages = () => {
@@ -59,8 +62,6 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
       pages.push(pageCount)
       return pages
     }
-
-
     return<>
       {this.props.isFetching && <img src={Loading} alt="loading"/>}
       <Users
@@ -70,14 +71,26 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> { /
         onPageChanged={this.onPageChanged}
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        setUsersId={this.props.setUsersId}/>
+        setUsersId={this.props.setUsersId}
+        toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+        followingInProgress={this.props.followingInProgress}
+      />
     </>
   }
 }
 
 export default connect(
   (state: AppStateType): UsersPageType => ({...state.usersReducer}),
-  {getUsers, follow, unfollow, setCurrentPage, setTotalCount, toggleIsFetching, setUsersId}
+  {
+    getUsers,
+    follow,
+    unfollow,
+    setCurrentPage,
+    setTotalCount,
+    toggleIsFetching,
+    setUsersId,
+    toggleIsFollowingProgress
+  }
 )(UsersContainer)
 
 

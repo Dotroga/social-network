@@ -6,13 +6,16 @@ import {UserType} from "../../../../Redux/userReducer";
 
 type UserPropsType = {
   user: UserType
+  disabled: boolean
   follow: (id: string) => void
   unfollow: (id: string) => void
   setUsersId: (id: string) => void
+  toggleIsFollowingProgress: (progress: boolean, id: string) => void
 }
 
 const User: React.FC<UserPropsType> = (props) => {
-  const {user: user, follow, unfollow, setUsersId} = props
+  const {user: user, follow, unfollow, setUsersId,
+    toggleIsFollowingProgress, disabled} = props
   const navigate = useNavigate()
   const openProfile = () => {
     navigate(`/profile/${user.id}`)
@@ -31,12 +34,26 @@ const User: React.FC<UserPropsType> = (props) => {
             {user.followed
               ? <button
                 onClick={() => {
-                  usersAPI.follow(user.id).then(code => code === 0 && unfollow(user.id))}}>
+                  toggleIsFollowingProgress(true, user.id)
+                  usersAPI.follow(user.id).then(code => {
+                    if (code === 0 ) {
+                      unfollow(user.id)
+                      toggleIsFollowingProgress(false, user.id)
+                    }})}}
+              disabled={disabled}
+              >
                 {user.followed ? 'Unfollow' : 'Follow'}
               </button>
               : <button
                 onClick={() => {
-                  usersAPI.unfollow(user.id).then(code => code === 0 && follow(user.id))}}>
+                  toggleIsFollowingProgress(true, user.id)
+                  usersAPI.unfollow(user.id).then(code => {
+                      if (code === 0 ) {
+                        follow(user.id)
+                        toggleIsFollowingProgress(false, user.id)
+                      }})}}
+                disabled={disabled}
+              >
                 {user.followed ? 'Unfollow' : 'Follow'}
               </button>
             }
