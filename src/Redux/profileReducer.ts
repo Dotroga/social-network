@@ -1,3 +1,5 @@
+import {DispatchType} from "./reduxStore";
+import {profileAPI} from "../api/api";
 
 const initialState= {
   userId: '25874',
@@ -31,8 +33,12 @@ export const profileReducer = (state:ProfileType = initialState , action:Actions
   }
 }
 
-type ActionsType = ReturnType<typeof setUsersProfile>
-| ReturnType<typeof setUsersId>
+type ActionsType = ReturnType<typeof setUserProfile>
+| ReturnType<typeof setUserId>
 
-export const setUsersProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}) as const
-export const setUsersId = (id: string) => ({type: 'SET-USERS-ID', id}) as const
+export const setUserProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}) as const
+export const setUserId = (id: string) => ({type: 'SET-USERS-ID', id}) as const
+export const getUserTK = (id: string) => (dispatch: DispatchType) => {
+  profileAPI.getUserProfile(id).then(data =>
+    dispatch(setUserProfile(data)))
+}

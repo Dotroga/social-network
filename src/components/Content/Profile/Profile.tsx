@@ -6,7 +6,6 @@ import {ProfileType} from "../../../Redux/profileReducer";
 
 type ProfilePropsType = {
   profile: ProfileType
-  setUsersProfile: (profile: any) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {

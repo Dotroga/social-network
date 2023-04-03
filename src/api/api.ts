@@ -19,7 +19,7 @@ export const usersAPI = {
 }
 
 export const authAPI = {
-  isAuthorizationMe: () => instance.get('auth/me')
+  me: () => instance.get('auth/me')
     .then(response => response.data)
 }
 

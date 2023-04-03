@@ -1,22 +1,20 @@
 import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {ProfileType, setUsersProfile} from "../../../Redux/profileReducer";
+import {getUserTK, ProfileType} from "../../../Redux/profileReducer";
 import {AppStateType} from "../../../Redux/reduxStore";
 import MyPostContainer from "./MyPost/MyPostContainer";
-import {profileAPI} from "../../../api/api";
 
 
 type ProfilePropsType = {
-  setUsersProfile: (profile: any) => void
+  getUserTK: (id: string) => void
   profile: ProfileType
 }
 
 class ProfileContainer extends React.Component<ProfilePropsType>{
 
   componentDidMount() {
-    profileAPI.getUserProfile(this.props.profile.userId).then(data =>
-      this.props.setUsersProfile(data))
+    this.props.getUserTK(this.props.profile.userId)
   }
   render = () => {
     return <>
@@ -29,7 +27,7 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
 const mapStateToProps = (state: AppStateType)=>({profile: {...state.profileReducer}})
 export default connect(
   mapStateToProps,
-  {setUsersProfile}
+  {getUserTK}
 ) (ProfileContainer)
 
 

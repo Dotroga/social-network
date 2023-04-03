@@ -7,7 +7,7 @@ import Users from "./Users";
 import Loading from './../../../img/loading.svg'
 import {AppStateType} from "../../../Redux/reduxStore";
 import {connect} from "react-redux";
-import {setUsersId} from "../../../Redux/profileReducer";
+import {setUserId} from "../../../Redux/profileReducer";
 
 type UsersListPropsType = {
   users: UserType []
@@ -19,7 +19,7 @@ type UsersListPropsType = {
   follow: (id: string) => void
   unfollow: (id: string) => void
   setCurrentPage: (currentPage: number) => void
-  setUsersId: (id: string) => void
+  setUserId: (id: string) => void
   getUsersTK: (currentPage: number, pageSize: number) => void
 }
 class UsersContainer extends React.Component<UsersListPropsType, UserType[]> {
@@ -49,7 +49,7 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> {
         onPageChanged={this.onPageChanged}
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        setUsersId={this.props.setUsersId}
+        setUserId={this.props.setUserId}
         followingInProgress={this.props.followingInProgress}
       />
     </>
@@ -58,7 +58,7 @@ class UsersContainer extends React.Component<UsersListPropsType, UserType[]> {
 
 export default connect(
   (state: AppStateType): UsersPageType => ({...state.usersReducer}),
-  {follow, unfollow, setCurrentPage, setUsersId, getUsersTK}
+  {follow, unfollow, setCurrentPage, setUserId, getUsersTK}
 )(UsersContainer)
 
 
