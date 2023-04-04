@@ -5,6 +5,7 @@ import {getUserTK, ProfileType} from "../../../Redux/profileReducer";
 import {AppStateType} from "../../../Redux/reduxStore";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import {AuthRedirect} from "../../../hoc/AuthRedirect";
+import {compose} from "redux";
 
 
 type ProfilePropsType = {
@@ -29,8 +30,12 @@ const mapStateToProps = (state: AppStateType)=>({
   profile: {...state.profileReducer},
 })
 
-export default AuthRedirect(connect(mapStateToProps, {getUserTK})
-(ProfileContainer))
+export default compose<React.ComponentType>(
+  connect(mapStateToProps, {getUserTK}),
+  AuthRedirect
+)(ProfileContainer)
+
+
 
 
 
