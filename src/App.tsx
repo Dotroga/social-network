@@ -5,6 +5,7 @@ import Dialogs from "./components/Content/Dialogs/Dialogs";
 import UsersContainer from "./components/Content/Users/UsersContainer";
 import ProfileContainer from "./components/Content/Profile/ProfileContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
+import {Login} from "./components/ Login/Login";
 
 
 
@@ -29,6 +30,7 @@ const App: React.FC<AppPropsType> = ({store}) => {
               {/*<Route path='/news' element={<News />}/>*/}
               <Route path='/users' element={<UsersContainer/>}/>
               {/*<Route path='/Settings' element={<Settings />}/>*/}
+              <Route path='/login' element={<Login/>}/>
             </Routes>
         </div>
       </div>
