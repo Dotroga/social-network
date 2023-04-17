@@ -1,12 +1,14 @@
 import React from 'react';
 
 import Loading from "../../../img/loading.svg";
-import {ProfileType} from "../../../Redux/profileReducer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ProfileType} from "../../../Redux/StateTypes";
 
 
 type ProfilePropsType = {
   profile: ProfileType
+  status: string
+  updateStatusTK: (status: string) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -16,7 +18,7 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     return <div className='container'>
       <h1>{props.profile.fullName}</h1>
       <img src={props.profile.photos.large} alt=""/>
-      <ProfileInfo/>
+      <ProfileInfo status={props.status} updateStatus={props.updateStatusTK}/>
     </div>
   }
 
