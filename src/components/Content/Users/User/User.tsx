@@ -26,7 +26,8 @@ const User: React.FC<UserPropsType> = (props) => {
                 style={{width: '100px'}}
                 src={user.photos.small ? user.photos.small : profileIcon}
                 alt=""/>
-              {user.name}
+                <div>{user.name}</div>
+                <div>{user.status}</div>
             </div>
             {user.followed
               ? <button

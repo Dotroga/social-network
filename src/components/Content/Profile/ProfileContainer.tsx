@@ -1,24 +1,33 @@
 import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getUserTK, ProfileType} from "../../../Redux/profileReducer";
+import {getStatusTK, getUserTK, updateStatusTK} from "../../../Redux/profileReducer";
 import {AppStateType} from "../../../Redux/reduxStore";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import {AuthRedirect} from "../../../hoc/AuthRedirect";
 import {compose} from "redux";
+import {ProfileType} from "../../../Redux/StateTypes";
 
 
 type ProfilePropsType = {
   getUserTK: (id: string) => void
+  getStatusTK: (id: string) => void
+  updateStatusTK: (status: string) => void
   profile: ProfileType
+  status: string
 }
 
 class ProfileContainer extends React.Component<ProfilePropsType>{
 
   componentDidMount() {
     this.props.getUserTK(this.props.profile.userId)
+    this.props.getStatusTK(this.props.profile.userId)
   }
+  // updateStatus = (status: string) => {
+  //   this.props.updateStatusTK(status)
+  // }
   render = () => {
+
     return <>
       <Profile {...this.props}/>
       <MyPostContainer/>
@@ -27,11 +36,12 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
 }
 
 const mapStateToProps = (state: AppStateType)=>({
-  profile: {...state.profileReducer},
+  profile: {...state.profileReducer.profile},
+  status: state.profileReducer.status
 })
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {getUserTK}),
+  connect(mapStateToProps, {getUserTK, getStatusTK, updateStatusTK}),
   AuthRedirect
 )(ProfileContainer)
 
