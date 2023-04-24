@@ -1,46 +1,22 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 
-type PropsType = {
-  status: string
-  updateStatus: (status: string) => void
-}
-type StateType = {
-  editMode: boolean
-  status: string
-}
-
-
-export class ProfileStatus extends React.Component<PropsType, StateType>{
+export class ProfileStatus extends React.Component<any, any>{
   state = {
-    editMode: false,
-    status: this.props.status
+    editMode: true,
+    status: 'My status'
   }
-  activeEditMode = () => {
-    this.setState({status: this.props.status})
-    this.setState({editMode: true})
+  changeEditMode = () => {
+    debugger
+    this.setState({editMode: !this.state.editMode})
   }
-  changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({status: e.currentTarget.value})
-  }
-  closeEditMode = () => {
-    this.setState({editMode: false})
-    this.props.updateStatus(this.state.status)
-    this.setState({status: ''})
-  }
-  // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<StateType>, snapshot?: any) {
-  //   prevProps.status !== this.state.status &&
-  // }
 
   render() {
     return (
       <div >
-        {!this.state.editMode
-        ? <span onDoubleClick={this.activeEditMode}>
-            {this.props.status  ||  'Change status..'}
-        </span>
+        {this.state.editMode
+        ? <span onDoubleClick={this.changeEditMode}>{this.state.status}</span>
         : <input
-            onBlur={this.closeEditMode}
-            onChange={this.changeStatus}
+            onBlur={this.changeEditMode}
             type="text"
             value={this.state.status}
             autoFocus={true}/>
