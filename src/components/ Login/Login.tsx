@@ -1,22 +1,25 @@
 import React from 'react';
-import {SuperInput} from "../Super/SuperInput/SuperInput";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-
-
-const Login = () => {
-  const onSubmit = (formData: any) => {
-    console.log(formData)
-  }
-  return <LoginReduxForm onSubmit={onSubmit}/>
+type FormDataType = {
+  login: string
+  password: string
+  rememberMe: boolean
 }
 
-const LoginForm = (props: any) => {
+const Login = () => {
+  const onSubmit = (formData: FormDataType) => {
+    console.log(formData)
+  }
+  return <div>
+    <h1>Login</h1>
+    <LoginReduxForm onSubmit={onSubmit}/>
+  </div>
+}
+
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => { // & IProps - пропмы от родителской компоненты передаваемые через атрибуты
   return (
     <form onSubmit={props.handleSubmit}>
-      <h1>Login</h1>
-      {/*<SuperInput callBack={()=>{}} text={''} title={'Login'} error={''}/>*/}
-      {/*<SuperInput callBack={()=>{}} text={''} title={'Password'} error={''}/>*/}
       <div>
         <Field placeholder='Login' name='login' component='input'/>
       </div>
@@ -24,7 +27,7 @@ const LoginForm = (props: any) => {
         <Field placeholder='Password' name='password' component='input'/>
       </div>
       <div>
-        <Field component='input' name='remember me' type='checkbox'/>
+        <Field component='input' name='rememberMe' type='checkbox'/>
         Remember me
       </div>
       <div>
@@ -34,8 +37,8 @@ const LoginForm = (props: any) => {
   )
 }
 
-const LoginReduxForm = reduxForm({
+const LoginReduxForm = reduxForm<FormDataType>({
   form: 'login'
 })(LoginForm)
 
-export default LoginReduxForm
+export default Login
