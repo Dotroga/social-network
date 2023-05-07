@@ -1,23 +1,23 @@
-*{
-  list-style: none;
-  outline: none;
-  user-select: none;
-  margin: 0;
-  padding: 0;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+* {
+    list-style: none;
+    outline: none;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
+
 body > #root {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: -webkit-linear-gradient(143deg, #cfc6f1,#dbdfe7,#b8bff4);
-  background: linear-gradient(143deg, #cfc6f1,#dbdfe7,#b8bff4);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: -webkit-linear-gradient(143deg, #cfc6f1, #dbdfe7, #b8bff4);
+    background: linear-gradient(143deg, #cfc6f1, #dbdfe7, #b8bff4);
 }
 
 

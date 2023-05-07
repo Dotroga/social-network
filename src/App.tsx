@@ -5,7 +5,7 @@ import Dialogs from "./components/Content/Dialogs/Dialogs";
 import UsersContainer from "./components/Content/Users/UsersContainer";
 import ProfileContainer from "./components/Content/Profile/ProfileContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
-import Login from "./components/ Login/Login";
+import {Login} from "./components/ Login/Login";
 
 
 
