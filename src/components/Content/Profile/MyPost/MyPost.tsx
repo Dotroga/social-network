@@ -18,8 +18,8 @@ export const MyPost: React.FC<MyPostPropsType> = (props) => {
   const formik = useFormik({
     initialValues: {newPost: '',},
     validate: (values) => {
-      let errors: {post?: string} = {}
-      if (!values.newPost) errors.post = 'Email required'
+      let errors: {newPost?: string} = {}
+      if (!values.newPost) errors.newPost = ''
       return errors
     },
     onSubmit: values => {
@@ -37,7 +37,7 @@ export const MyPost: React.FC<MyPostPropsType> = (props) => {
       <form onSubmit={formik.handleSubmit}>
         <SuperTextarea
           {...formik.getFieldProps('newPost')}
-          error={''}
+          error={formik.touched.newPost && formik.errors.newPost && formik.errors.newPost}
         />
         <SuperButton title='Add' type='submit'/>
       </form>
