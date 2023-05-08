@@ -18,6 +18,7 @@
   background: linear-gradient(90deg, #f3f5fa,#f1effb);
   border-radius: 10px;
   overflow: auto;
+    z-index: 1;
 }
 .content::-webkit-scrollbar {
   width: 22px; /* ширина scrollbar */

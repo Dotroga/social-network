@@ -1,6 +1,12 @@
 import React from 'react';
 import s from './Navbar.module.css'
 import {ItemLink} from "./ItemLink/ItemLink";
+import ReactLogo from '../../img/ReactLogo.svg'
+import mail from '../../img/mail.svg'
+import profile from '../../img/user.svg'
+import users from '../../img/users.svg'
+import setting from '../../img/setting.svg'
+import logout from '../../img/logout.svg'
 
 type NavbarPropsType = {
   login: string | null
@@ -12,17 +18,17 @@ const Navbar: React.FC<NavbarPropsType> = (props) => {
   const {login, isAuth, logOut} = props
   console.log(isAuth)
   return (<div className={s.nav}>
-    <div>{isAuth ? login : 'Login'}</div>
-    <ItemLink>Profile</ItemLink>
-    <ItemLink>Messages</ItemLink>
-    <ItemLink>News</ItemLink>
-    <ItemLink>Users</ItemLink>
+    <img  className={s.logo} src={ReactLogo} alt=""/>
+    <div className={s.me}>{isAuth ? login : 'Login'}</div>
+    <ItemLink img={profile}>Profile</ItemLink>
+    <ItemLink img={mail}>Messages</ItemLink>
+    <ItemLink img={users}>Users</ItemLink>
     <div className={s.setting}>
-      <ItemLink>Setting</ItemLink>
+      <ItemLink img={setting}>Setting</ItemLink>
     </div>
     {isAuth &&
       <div onClick={logOut} className={s.logOut}>
-      <ItemLink path='login'>logOut</ItemLink>
+      <ItemLink img={logout} path='login'>logOut</ItemLink>
     </div>}
     </div>);
 }

@@ -7,7 +7,7 @@ export type AuthType = {
   email: string | null
   login: string | null
   isAuth: boolean
-  errorAuthorisation?: string
+  errorAuth?: string
 }
 const initialState: AuthType = {
   id: null,
@@ -20,13 +20,15 @@ export const authReducer = (state: AuthType  = initialState, action: Actions): A
   switch (action.type) {
     case "SET-USER-DATA":
       const isAuth = !!action.data.email
-      return {...state, ...action.data, isAuth}
+      return {...action.data, isAuth}
+    case "SET-ERROR-AUTH": return {...state, errorAuth: action.error}
     default: return state
   }
 }
-type Actions = ReturnType<typeof setUserData>
+type Actions = ReturnType<typeof setUserData> | ReturnType<typeof setErrorAuth>
 
 export const setUserData = (data: MeType) => ({type: 'SET-USER-DATA', data} as const )
+export const setErrorAuth = (error: string) => ({type: 'SET-ERROR-AUTH', error} as const )
 export const getUserData = () => (dispatch: ThunkDispatchType) => {
   authAPI.me()
     .then(data => {
@@ -39,7 +41,7 @@ export const login = (data: FormDataType) => (dispatch: ThunkDispatchType) => {
     .then((res) => {
       res.data.resultCode === 0
         ? dispatch(getUserData())
-        : console.error(res.data.messages)
+        : dispatch(setErrorAuth(res.data.messages[0]))
     })
 }
 
@@ -47,7 +49,6 @@ export const logOut = () => (dispatch: ThunkDispatchType) => {
   debugger
   authAPI.logOut()
     .then((res) => {
-      debugger
       res.data.resultCode === 0
         ? dispatch(setUserData({id: null, email: null, login: null}))
         : console.error(res.data.messages)
