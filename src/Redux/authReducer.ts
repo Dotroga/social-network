@@ -1,5 +1,5 @@
 import {authAPI, MeType} from "../api/api";
-import {DispatchType, ThunkDispatchType} from "./reduxStore";
+import {ThunkDispatchType} from "./reduxStore";
 import {FormDataType} from "../components/ Login/Login";
 
 export type AuthType = {
@@ -7,6 +7,7 @@ export type AuthType = {
   email: string | null
   login: string | null
   isAuth: boolean
+  errorAuthorisation?: string
 }
 const initialState: AuthType = {
   id: null,
@@ -15,10 +16,11 @@ const initialState: AuthType = {
   isAuth: false
 }
 
-export const authReducer = (state = initialState, action: Actions): AuthType => {
+export const authReducer = (state: AuthType  = initialState, action: Actions): AuthType => {
   switch (action.type) {
     case "SET-USER-DATA":
-      return {...state, ...action.data, isAuth: true}
+      const isAuth = !!action.data.email
+      return {...state, ...action.data, isAuth}
     default: return state
   }
 }
@@ -42,10 +44,12 @@ export const login = (data: FormDataType) => (dispatch: ThunkDispatchType) => {
 }
 
 export const logOut = () => (dispatch: ThunkDispatchType) => {
+  debugger
   authAPI.logOut()
     .then((res) => {
+      debugger
       res.data.resultCode === 0
-        ? setUserData({id: null, email: null, login: null})
+        ? dispatch(setUserData({id: null, email: null, login: null}))
         : console.error(res.data.messages)
     })
 }

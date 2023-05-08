@@ -52,10 +52,11 @@ export const Login = () => {
         type='password'
         error={formik.touched.password && formik.errors.password && formik.errors.password}
       />
-      <SuperCheckbox
-        checked={formik.values.rememberMe}
-        {...formik.getFieldProps('rememberMe')}
-      />
+
+        <SuperCheckbox
+          checked={formik.values.rememberMe}
+          {...formik.getFieldProps('rememberMe')}
+        >Remember me</SuperCheckbox>
       <SuperButton title='Login' type='submit'/>
     </Form>
   )

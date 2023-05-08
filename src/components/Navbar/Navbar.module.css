@@ -1,4 +1,7 @@
 .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     grid-area: nav;
     background-color: #e8e8f3;
     border-radius: 10px 0 0 10px;
@@ -8,27 +11,9 @@
 
 
 .item {
+    width: 100%;
     margin: 6px;
     z-index: 2;
-}
-.logo {
-height: 60px;
-    z-index: 1;
-    margin-bottom: 30px;
-}
-img.redux {
-    width: 60px;
-    display: block;
-    margin:  30px auto;
-    user-select: none;
-}
-img.react {
-    height: 120px;
-    top: -121px;
-    position: relative;
-    right: 1px;
-    opacity: 0.05;
-    user-select: none;
 }
 .item a{
     z-index: 2;
@@ -46,5 +31,13 @@ img.react {
 }
 
 .setting {
+    width: 100%;
     margin-top: 30px;
+}
+
+.logOut {
+    cursor: pointer;
+    margin: auto 20px 20px 20px  ;
+    padding: 10px;
+    align-self: center;
 }
