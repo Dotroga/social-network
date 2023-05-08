@@ -1,4 +1,5 @@
 import axios from "axios";
+import {FormDataType} from "../components/ Login/Login";
 
 const instance = axios.create({
   withCredentials: true,
@@ -19,8 +20,12 @@ export const usersAPI = {
 }
 
 export const authAPI = {
-  me: () => instance.get('auth/me')
-    .then(response => response.data)
+  me: () => instance.get<ResponseType<MeType>>('auth/me')
+    .then(response => response.data),
+  login: (data: FormDataType) =>
+    instance.post<ResponseType<{userId: number}>>('auth/login',data),
+  logOut: () =>
+    instance.delete<ResponseType>('auth/login')
 }
 
 export const profileAPI = {
@@ -29,7 +34,20 @@ export const profileAPI = {
   getStatus: (userId: string) =>  instance.get(`profile/status/${userId}`)
     .then(response => response.data),
   updateStatus: (status: string) => instance.put(`profile/status/`, {status})
-
 }
+
+type ResponseType<T = {}> = {
+  resultCode: number
+  fieldsErrors: string[]
+  messages: string[]
+  data: T
+}
+
+export type MeType = {
+  id: number | null
+  email: string | null
+  login: string | null
+}
+
 
 

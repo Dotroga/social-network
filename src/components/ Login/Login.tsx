@@ -4,20 +4,17 @@ import {SuperInput} from "../Super/SuperInput/SuperInput";
 import {SuperCheckbox} from "../Super/SuperCheckbox/SuperCheckbox";
 import styled from "styled-components";
 import {SuperButton} from "../Super/SuperButton/SuperButton";
+import {login} from "../../Redux/authReducer";
+import {useAppDispatch} from "../../Redux/reduxStore";
 
-type FormDataType = {
+export type FormDataType = {
   email: string
   password: string
-  rememberMe: boolean
-}
-
-type LoginErrorType = {
-  email?: string
-  password?: string
   rememberMe?: boolean
 }
 
 export const Login = () => {
+  const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -25,7 +22,7 @@ export const Login = () => {
       rememberMe: false
     },
     validate: (values) => {
-      let errors: LoginErrorType = {}
+      let errors: Partial<FormDataType> = {} // Partial<T> - делает все свойства переданного типа не обязательными
       if (!values.email) {
         errors.email = 'Email required'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -39,7 +36,7 @@ export const Login = () => {
       return errors
     },
     onSubmit: values => {
-      console.log(values)
+      dispatch(login(values))
     }
   })
 
@@ -70,11 +67,12 @@ const Form = styled.form`
     padding: 20px;
   }
   height: 100%;
-  min-width: 300px;
+  margin: auto;
+  min-width: 250px;
+  max-width: 500px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 150px;
   gap: 10px;
 `
 
