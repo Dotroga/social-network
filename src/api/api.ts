@@ -12,10 +12,10 @@ export const usersAPI = {
       `users?page=${currentPage}&count=${pageSize}`)
       .then(response => response.data)
   ,
-  follow: (id: string) => instance.post(`follow/${id}`)
+  follow: (id: number) => instance.post(`follow/${id}`)
       .then(response => response.data.resultCode)
   ,
-  unfollow: (id: string) => instance.delete(`follow/${id}`)
+  unfollow: (id: number) => instance.delete(`follow/${id}`)
       .then(response => response.data.resultCode)
 }
 
@@ -29,9 +29,9 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-  getUserProfile: (userId: string) => instance.get(`profile/${userId}`)
+  getUserProfile: (userId: number) => instance.get(`profile/${userId}`)
     .then(response => response.data),
-  getStatus: (userId: string) =>  instance.get(`profile/status/${userId}`)
+  getStatus: (userId: number) =>  instance.get(`profile/status/${userId}`)
     .then(response => response.data),
   updateStatus: (status: string) => instance.put(`profile/status/`, {status})
 }

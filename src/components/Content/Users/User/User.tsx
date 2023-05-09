@@ -6,9 +6,9 @@ import {UserType} from "../../../../Redux/userReducer";
 type UserPropsType = {
   user: UserType
   disabled: boolean
-  follow: (id: string) => void
-  unfollow: (id: string) => void
-  setUsersId: (id: string) => void
+  follow: (id: number) => void
+  unfollow: (id: number) => void
+  setUsersId: (id: number) => void
 }
 
 const User: React.FC<UserPropsType> = (props) => {

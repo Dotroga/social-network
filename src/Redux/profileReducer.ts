@@ -4,7 +4,7 @@ import {ProfilePageType} from "./StateTypes";
 
 const initialState: ProfilePageType= {
   profile: {
-    userId: '25874',
+    userId: -1,
     lookingForAJob: false,
     lookingForAJobDescription: '',
     fullName: '',
@@ -42,13 +42,13 @@ type ActionsType =
   | ReturnType<typeof setStatus>
 
 export const setUserProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}as const)
-export const setUserId = (id: string) => ({type: 'SET-USERS-ID', id}as const)
+export const setUserId = (id: number) => ({type: 'SET-USERS-ID', id}as const)
 export const setStatus = (status: string) => ({type: 'SET-STATUS', status}as const)
-export const getUserTK = (id: string) => (dispatch: DispatchType) => {
+export const getUserTK = (id: number) => (dispatch: DispatchType) => {
   profileAPI.getUserProfile(id).then(data =>
     dispatch(setUserProfile(data)))
 }
-export const getStatusTK = (id: string) => (dispatch: DispatchType) => {
+export const getStatusTK = (id: number) => (dispatch: DispatchType) => {
   profileAPI.getStatus(id).then((data)=>{
     dispatch(setStatus(data))
   })

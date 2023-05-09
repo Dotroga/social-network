@@ -1,6 +1,7 @@
 import {authAPI, MeType} from "../api/api";
 import {ThunkDispatchType} from "./reduxStore";
 import {FormDataType} from "../components/ Login/Login";
+import {getUserTK} from "./profileReducer";
 
 export type AuthType = {
   isInitialized: boolean
@@ -41,15 +42,20 @@ export const setIsInitializedAC = (value: boolean) =>
 export const getUserData = () => (dispatch: ThunkDispatchType) => {
   authAPI.me()
     .then(data => {
-      data.resultCode === 0 &&
-      dispatch(setUserData(data.data))})
+     if (data.resultCode === 0 ) {
+       dispatch(setUserData(data.data))
+       dispatch(setIsInitializedAC(true))
+     }
+    })
 }
 export const login = (data: FormDataType) => (dispatch: ThunkDispatchType) => {
   authAPI.login(data)
     .then((res) => {
-      res.data.resultCode === 0
-        ? dispatch(getUserData())
-        : dispatch(setErrorAuth(res.data.messages[0]))
+     if (res.data.resultCode === 0)  {
+       dispatch(getUserData())
+     } else {
+       dispatch(setErrorAuth(res.data.messages[0]))
+     }
     })
 }
 
@@ -57,9 +63,12 @@ export const logOut = () => (dispatch: ThunkDispatchType) => {
   debugger
   authAPI.logOut()
     .then((res) => {
-      res.data.resultCode === 0
-        ? dispatch(setUserData({id: null, email: null, login: null}))
-        : console.error(res.data.messages)
+      if(res.data.resultCode === 0) {
+        dispatch(setUserData({id: null, email: null, login: null}))
+
+      } else {
+        console.error(res.data.messages)
+      }
     })
 }
 

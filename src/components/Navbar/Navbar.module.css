@@ -21,6 +21,8 @@
 
 .me {
     margin: 55px 0;
+    cursor: pointer;
+    z-index: 2;
 }
 
 

@@ -15,11 +15,11 @@ type UsersListPropsType = {
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
-  followingInProgress:  string[]
-  follow: (id: string) => void
-  unfollow: (id: string) => void
+  followingInProgress:  number[]
+  follow: (id: number) => void
+  unfollow: (id: number) => void
   setCurrentPage: (currentPage: number) => void
-  setUserId: (id: string) => void
+  setUserId: (id: number) => void
   getUsersTK: (currentPage: number, pageSize: number) => void
 }
 class UsersContainer extends React.Component<UsersListPropsType, UserType[]> {

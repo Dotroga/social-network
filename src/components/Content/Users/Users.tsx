@@ -7,11 +7,11 @@ type UsersPropsType = {
   users: UserType []
   pages: number[]
   currentPage: number
-  followingInProgress: string[]
+  followingInProgress: number[]
   onPageChanged: (p: number)=>void
-  follow: (id: string) => void
-  unfollow: (id: string) => void
-  setUserId: (id: string) => void
+  follow: (id: number) => void
+  unfollow: (id: number) => void
+  setUserId: (id: number) => void
 }
 
 const Users: React.FC<UsersPropsType> = (props) => {

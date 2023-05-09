@@ -3,12 +3,11 @@ import Navbar from "./Navbar";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {getUserData, logOut} from "../../Redux/authReducer";
-
-
-
-
+import {getUserTK} from "../../Redux/profileReducer";
 
 type NavbarPropsType = {
+  getUser: (id: number)=> void
+  id: number
   getUserData: () => void
   logOut: () => void
   login: string | null
@@ -22,6 +21,8 @@ class NavbarContainer extends React.Component<NavbarPropsType>{
 
   render () {
     return <Navbar
+      id={this.props.id}
+      getUser={this.props.getUser}
       login={this.props.login}
       isAuth={this.props.isAuth}
       logOut={this.props.logOut}
@@ -31,9 +32,10 @@ class NavbarContainer extends React.Component<NavbarPropsType>{
 
 const mapStateToProps = (state: AppStateType) => ({
   login: state.authReducer.login,
-  isAuth: state.authReducer.isAuth
+  isAuth: state.authReducer.isAuth,
+  id: state.authReducer.id!
 })
 
 
-export default connect(mapStateToProps, {getUserData, logOut})(NavbarContainer);
+export default connect(mapStateToProps, {getUserData, logOut, getUser: getUserTK})(NavbarContainer);
 

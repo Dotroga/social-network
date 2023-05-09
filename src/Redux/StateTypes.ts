@@ -3,7 +3,7 @@ export type ProfilePageType = {
   status: string
 }
 export type ProfileType = {
-  userId: string
+  userId: number
   lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string

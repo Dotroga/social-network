@@ -10,8 +10,8 @@ import {ProfileType} from "../../../Redux/StateTypes";
 
 
 type ProfilePropsType = {
-  getUserTK: (id: string) => void
-  getStatusTK: (id: string) => void
+  getUserTK: (id: number) => void
+  getStatusTK: (id: number) => void
   updateStatusTK: (status: string) => void
   profile: ProfileType
   status: string
