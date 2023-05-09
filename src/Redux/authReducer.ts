@@ -3,13 +3,16 @@ import {ThunkDispatchType} from "./reduxStore";
 import {FormDataType} from "../components/ Login/Login";
 
 export type AuthType = {
+  isInitialized: boolean
   id: number| null
   email: string | null
   login: string | null
   isAuth: boolean
   errorAuth?: string
+
 }
 const initialState: AuthType = {
+  isInitialized: false,
   id: null,
   email: null,
   login: null,
@@ -20,19 +23,24 @@ export const authReducer = (state: AuthType  = initialState, action: Actions): A
   switch (action.type) {
     case "SET-USER-DATA":
       const isAuth = !!action.data.email
-      return {...action.data, isAuth}
+      return {...state, ...action.data, isAuth}
     case "SET-ERROR-AUTH": return {...state, errorAuth: action.error}
+    case 'SET-IS-INITIALIZED':
+      return {...state, isInitialized: action.value}
     default: return state
   }
 }
-type Actions = ReturnType<typeof setUserData> | ReturnType<typeof setErrorAuth>
+type Actions = ReturnType<typeof setUserData>
+  | ReturnType<typeof setErrorAuth>
+  | ReturnType<typeof setIsInitializedAC>
 
 export const setUserData = (data: MeType) => ({type: 'SET-USER-DATA', data} as const )
 export const setErrorAuth = (error: string) => ({type: 'SET-ERROR-AUTH', error} as const )
+export const setIsInitializedAC = (value: boolean) =>
+  ({type: 'SET-IS-INITIALIZED', value} as const)
 export const getUserData = () => (dispatch: ThunkDispatchType) => {
   authAPI.me()
     .then(data => {
-      console.log(data)
       data.resultCode === 0 &&
       dispatch(setUserData(data.data))})
 }

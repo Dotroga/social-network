@@ -16,7 +16,6 @@ type NavbarPropsType = {
 
 const Navbar: React.FC<NavbarPropsType> = (props) => {
   const {login, isAuth, logOut} = props
-  console.log(isAuth)
   return (<div className={s.nav}>
     <img  className={s.logo} src={ReactLogo} alt=""/>
     <div className={s.me}>{isAuth ? login : 'Login'}</div>

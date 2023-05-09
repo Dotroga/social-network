@@ -27,7 +27,6 @@ export const MyPost: React.FC<MyPostPropsType> = (props) => {
 
     }
   })
-  console.log(formik.values)
 
   // const pureOnEnter = (e: any) =>
   //  e.key === 'Enter' && addPost
