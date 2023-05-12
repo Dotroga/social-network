@@ -20,6 +20,7 @@ class NavbarContainer extends React.Component<NavbarPropsType>{
   }
 
   render () {
+    console.log('Navbar')
     return <Navbar
       id={this.props.id}
       getUser={this.props.getUser}

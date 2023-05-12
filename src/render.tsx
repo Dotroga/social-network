@@ -5,6 +5,11 @@ import {store} from "./Redux/reduxStore";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
+
+setInterval(()=> {
+  store.dispatch({type:'FACE'})
+}, 1000)
+
 export const renderTree = () => {
   ReactDOM.render(
     <BrowserRouter>

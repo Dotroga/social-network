@@ -1,6 +1,7 @@
 export type ProfilePageType = {
   profile: ProfileType
   status: string
+  face: number
 }
 export type ProfileType = {
   userId: number

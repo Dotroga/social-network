@@ -22,7 +22,8 @@ const initialState: ProfilePageType= {
       large: ''
     }
   },
- status: ''
+ status: '',
+  face: 0
 }
 
 export const profileReducer = (state: ProfilePageType = initialState , action:ActionsType):ProfilePageType => {
@@ -32,6 +33,7 @@ export const profileReducer = (state: ProfilePageType = initialState , action:Ac
     case "SET-USERS-ID":
       return {...state, profile:{...state.profile, userId: action.id}}
     case "SET-STATUS":return {...state, status: action.status}
+    case "FACE": return {...state, face: state.face + 1}
     default: return state
   }
 }
@@ -40,6 +42,7 @@ type ActionsType =
   ReturnType<typeof setUserProfile>
   | ReturnType<typeof setUserId>
   | ReturnType<typeof setStatus>
+  | {type:'FACE'}
 
 export const setUserProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}as const)
 export const setUserId = (id: number) => ({type: 'SET-USERS-ID', id}as const)
