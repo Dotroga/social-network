@@ -7,7 +7,7 @@ import MyPostContainer from "./MyPost/MyPostContainer";
 import {AuthRedirect} from "../../../hoc/AuthRedirect";
 import {compose} from "redux";
 import {ProfileType} from "../../../Redux/StateTypes";
-import {getProfile, getStatus} from "../../../Redux/profileSelectors";
+import {getProfileSuper, getStatusSuper} from "../../../Redux/profileSelectors";
 
 type ProfilePropsType = {
   getUserTK: (id: number) => void
@@ -27,7 +27,7 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
   //   this.props.updateStatusTK(status)
   // }
   render = () => {
-
+    console.log('render Profile')
     return <>
       <Profile {...this.props}/>
       <MyPostContainer/>
@@ -36,8 +36,8 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
 }
 
 const mapStateToProps = (state: AppStateType)=>({
-  profile: getProfile(state),
-  status: getStatus(state)
+  profile: getProfileSuper(state),
+  status: getStatusSuper(state)
 })
 
 export default compose<React.ComponentType>(

@@ -1,7 +1,6 @@
 import {authAPI, MeType} from "../api/api";
 import {ThunkDispatchType} from "./reduxStore";
 import {FormDataType} from "../components/ Login/Login";
-import {getUserTK} from "./profileReducer";
 
 export type AuthType = {
   isInitialized: boolean
@@ -10,14 +9,15 @@ export type AuthType = {
   login: string | null
   isAuth: boolean
   errorAuth?: string
-
+  face: number
 }
 const initialState: AuthType = {
   isInitialized: false,
   id: null,
   email: null,
   login: null,
-  isAuth: false
+  isAuth: false,
+  face: 0
 }
 
 export const authReducer = (state: AuthType  = initialState, action: Actions): AuthType => {
@@ -28,12 +28,14 @@ export const authReducer = (state: AuthType  = initialState, action: Actions): A
     case "SET-ERROR-AUTH": return {...state, errorAuth: action.error}
     case 'SET-IS-INITIALIZED':
       return {...state, isInitialized: action.value}
+    case "FACE": return {...state, face: state.face + 1}
     default: return state
   }
 }
 type Actions = ReturnType<typeof setUserData>
   | ReturnType<typeof setErrorAuth>
   | ReturnType<typeof setIsInitializedAC>
+  | {type: 'FACE'}
 
 export const setUserData = (data: MeType) => ({type: 'SET-USER-DATA', data} as const )
 export const setErrorAuth = (error: string) => ({type: 'SET-ERROR-AUTH', error} as const )
