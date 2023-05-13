@@ -1,27 +1,32 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
+import {ProfileInfoPropsType} from "../ProfileInfo";
 
-export class ProfileStatus extends React.Component<any, any>{
-  state = {
-    editMode: true,
-    status: 'My status'
-  }
-  changeEditMode = () => {
-    debugger
-    this.setState({editMode: !this.state.editMode})
+export const ProfileStatus: React.FC<ProfileInfoPropsType> = (props) =>{
+  const [editMode, setEditMode] = useState(false)
+  const [value, setValue] = useState<string>(props.status)
+
+  const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
   }
 
-  render() {
+  const changeEditMode = () => {
+    setEditMode((prevState)=>!prevState)
+    editMode && props.updateStatus(value)
+  }
+
+    console.log(props.status)
     return (
       <div >
-        {this.state.editMode
-        ? <span onDoubleClick={this.changeEditMode}>{this.state.status}</span>
+        {!editMode
+        ? <span onDoubleClick={changeEditMode}>{value}</span>
         : <input
-            onBlur={this.changeEditMode}
+            onBlur={changeEditMode}
+            onChange={onChangeValue}
             type="text"
-            value={this.state.status}
-            autoFocus={true}/>
+            value={value}
+            autoFocus={true}
+          />
         }
       </div>
     );
   }
-}

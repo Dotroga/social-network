@@ -15,7 +15,6 @@ type AppPropsType = {
 
 class App extends React.Component<AppPropsType> {
   render() {
-    console.log(this.props.isInitialized)
     return (
       <WrapperApp>
         <NavbarContainer/>

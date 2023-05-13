@@ -1,18 +1,19 @@
 import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getStatusTK, getUserTK, updateStatusTK} from "../../../Redux/profileReducer";
 import {AppStateType} from "../../../Redux/reduxStore";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import {AuthRedirect} from "../../../hoc/AuthRedirect";
 import {compose} from "redux";
 import {ProfileType} from "../../../Redux/StateTypes";
 import {getProfileSuper, getStatusSuper} from "../../../Redux/profileSelectors";
+import {getStatus, getUser, updateStatus} from "../../../Redux/profileReducer";
 
 type ProfilePropsType = {
-  getUserTK: (id: number) => void
-  getStatusTK: (id: number) => void
-  updateStatusTK: (status: string) => void
+  id: number
+  getUser: (id: number) => void
+  getStatus: (id: number) => void
+  updateStatus: (status: string) => void
   profile: ProfileType
   status: string
 }
@@ -20,16 +21,15 @@ type ProfilePropsType = {
 class ProfileContainer extends React.Component<ProfilePropsType>{
 
   componentDidMount() {
-    this.props.getUserTK(this.props.profile.userId)
-    this.props.getStatusTK(this.props.profile.userId)
+    this.props.getUser(this.props.profile.userId)
+    this.props.getStatus(this.props.profile.userId)
   }
-  // updateStatus = (status: string) => {
-  //   this.props.updateStatusTK(status)
-  // }
+  updateStatus = (status: string) => {
+    this.props.updateStatus(status)
+  }
   render = () => {
-    console.log('render Profile')
     return <>
-      <Profile {...this.props}/>
+      <Profile {...this.props} updateStatus={this.updateStatus}/>
       <MyPostContainer/>
     </>
   }
@@ -37,11 +37,12 @@ class ProfileContainer extends React.Component<ProfilePropsType>{
 
 const mapStateToProps = (state: AppStateType)=>({
   profile: getProfileSuper(state),
-  status: getStatusSuper(state)
+  status: getStatusSuper(state),
+  id: state.authReducer.id
 })
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {getUserTK, getStatusTK, updateStatusTK}),
+  connect(mapStateToProps, {getUser, getStatus, updateStatus}),
   AuthRedirect
 )(ProfileContainer)
 

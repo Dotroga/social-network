@@ -9,7 +9,7 @@ import setting from '../../img/setting.svg'
 import logout from '../../img/logout.svg'
 
 type NavbarPropsType = {
-  getUser: (id: number)=> void
+  getUserData: (id: number)=> void
   id: number
   login: string | null
   isAuth: boolean
@@ -17,11 +17,11 @@ type NavbarPropsType = {
 }
 
 const Navbar: React.FC<NavbarPropsType> = (props) => {
-  const {getUser, id, login, isAuth, logOut} = props
+  const {getUserData, id, login, isAuth, logOut} = props
   return (<div className={s.nav}>
     <img  className={s.logo} src={ReactLogo} alt=""/>
     <div
-      onClick={()=>getUser(id)}
+      onClick={()=>getUserData(id)}
       className={s.me}
     >{isAuth ? login : 'Login'}
     </div>

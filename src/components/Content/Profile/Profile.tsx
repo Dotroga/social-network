@@ -8,7 +8,7 @@ import {ProfileType} from "../../../Redux/StateTypes";
 type ProfilePropsType = {
   profile: ProfileType
   status: string
-  updateStatusTK: (status: string) => void
+  updateStatus: (status: string) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -18,7 +18,7 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     return <div className='container'>
       <h1>{props.profile.fullName}</h1>
       <img src={props.profile.photos.large} alt=""/>
-      <ProfileInfo status={props.status} updateStatus={props.updateStatusTK}/>
+      <ProfileInfo status={props.status} updateStatus={props.updateStatus}/>
     </div>
   }
 

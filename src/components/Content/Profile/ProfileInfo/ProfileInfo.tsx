@@ -1,7 +1,7 @@
 import React from 'react';
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
-type ProfileInfoPropsType = {
+export type ProfileInfoPropsType = {
   status: string
   updateStatus: (status: string) => void
 }
