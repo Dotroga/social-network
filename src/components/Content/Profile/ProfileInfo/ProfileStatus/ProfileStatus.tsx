@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {ProfileInfoPropsType} from "../ProfileInfo";
 
 export const ProfileStatus: React.FC<ProfileInfoPropsType> = (props) =>{
@@ -8,6 +8,10 @@ export const ProfileStatus: React.FC<ProfileInfoPropsType> = (props) =>{
   const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
+
+  useEffect(()=> {
+    setValue(props.status)
+  },[props.status])
 
   const changeEditMode = () => {
     setEditMode((prevState)=>!prevState)

@@ -7,12 +7,11 @@ import {AuthRedirect} from "../../../hoc/AuthRedirect";
 import {compose} from "redux";
 import {ProfileType} from "../../../Redux/StateTypes";
 import {getProfileSuper, getStatusSuper} from "../../../Redux/profileSelectors";
-import {getStatus, getUser, updateStatus} from "../../../Redux/profileReducer";
+import {getDataUser, updateStatus} from "../../../Redux/profileReducer";
 
 type ProfilePropsType = {
   id: number
-  getUser: (id: number) => void
-  getStatus: (id: number) => void
+  getDataUser: (id: number) => void
   updateStatus: (status: string) => void
   profile: ProfileType
   status: string
@@ -21,8 +20,7 @@ type ProfilePropsType = {
 class ProfileContainer extends React.Component<ProfilePropsType>{
 
   componentDidMount() {
-    this.props.getUser(this.props.profile.userId)
-    this.props.getStatus(this.props.profile.userId)
+    this.props.getDataUser(this.props.profile.userId)
   }
   updateStatus = (status: string) => {
     this.props.updateStatus(status)
@@ -42,7 +40,7 @@ const mapStateToProps = (state: AppStateType)=>({
 })
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {getUser, getStatus, updateStatus}),
+  connect(mapStateToProps, {getDataUser, updateStatus}),
   AuthRedirect
 )(ProfileContainer)
 

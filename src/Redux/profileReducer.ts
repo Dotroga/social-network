@@ -45,14 +45,24 @@ type ActionsType =
 export const setUserProfile = (profile: any) => ({type: 'SET-USERS-PROFILE', profile}as const)
 export const setUserId = (id: number) => ({type: 'SET-USERS-ID', id}as const)
 export const setStatus = (status: string) => ({type: 'SET-STATUS', status}as const)
-export const getUser = (id: number) => (dispatch: DispatchType) => {
-  profileAPI.getUserProfile(id).then(data =>
-    dispatch(setUserProfile(data)))
-}
-export const getStatus = (id: number) => (dispatch: DispatchType) => {
-  profileAPI.getStatus(id).then((data)=>{
-    dispatch(setStatus(data))
-  })
+
+//
+// export const getUser = (id: number) => (dispatch: DispatchType) => {
+//   profileAPI.getUserProfile(id).then(data =>
+//     dispatch(setUserProfile(data)))
+// }
+// export const getStatus = (id: number) => (dispatch: DispatchType) => {
+//   profileAPI.getStatus(id).then((data)=>{
+//     dispatch(setStatus(data))
+//   })
+// }
+
+export const getDataUser = (id: number) => (dispatch: DispatchType) => {
+  Promise.all([profileAPI.getUserProfile(id),profileAPI.getStatus(id)])
+    .then((res)=> {
+      dispatch(setUserProfile(res[0]))
+      dispatch(setStatus(res[1]))
+    })
 }
 export const updateStatus = (status: string) => (dispatch: DispatchType) => {
   profileAPI.updateStatus(status).then(()=>{
